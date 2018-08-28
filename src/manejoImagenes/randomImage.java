@@ -14,10 +14,14 @@ import javax.imageio.ImageIO;
  *
  * @author Jean Carlo
  */
+
+//Retrun a matrix with the color of each pixel 
+
 public class randomImage 
 {    
-    public String getImage(int width, int height, String name) throws IOException
+    public int[][] getImage(int width, int height, String name) throws IOException
     {
+       int[][] pixels = new int[width][height];
        BufferedImage img = new BufferedImage(width, height,  BufferedImage.TYPE_INT_ARGB);
        File f = null;
        
@@ -30,7 +34,7 @@ public class randomImage
                 
                 //Guarda el pixel en escala de grises
                 int p = (a<<24) | (avg<<16) | (avg<<8) | avg;
-                
+                pixels[x][y] = p;
                 img.setRGB(y, x, p); 
             }
         }
@@ -44,7 +48,7 @@ public class randomImage
           System.out.println(e);
         }
         
-        return(name+".png");
+        return(pixels);
       
     }
 }

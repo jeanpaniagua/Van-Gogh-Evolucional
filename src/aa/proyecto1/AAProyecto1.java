@@ -20,19 +20,22 @@ import manejoImagenes.*;
  */
 public class AAProyecto1 {    
     
-    public void firstGeneration(int width, int height) throws IOException
+    public static void firstGeneration(int width, int height) throws IOException
     {
         for(int i = 0; i < 10; i++)
         {
             randomImage img = new randomImage(); 
-            img.getImage(width, height, "1."+i+1);
+            img.getImage(width, height, "1."+i);
         }
     }
     
     public static void main(String[] args) throws IOException
     {
+        
         rgbToGrayScale img = new rgbToGrayScale();
-        img.getGrayImg("images\\test.png");
+        int[][] pixels = img.getGrayImg("images\\test.png");
+        
+        firstGeneration(pixels.length, pixels[0].length);        
         
     }
     

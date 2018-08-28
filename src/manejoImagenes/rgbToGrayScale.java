@@ -18,10 +18,14 @@ import javax.imageio.ImageIO;
 //Lee imagen y la guarda en escala de grises
 //Read and imagen and create a new one on gray scale
 
+//Return a matrix with the color of each pixel 
+
 public class rgbToGrayScale {
 
-    public void getGrayImg(String name) throws IOException
+    public int[][] getGrayImg(String name) throws IOException
     {
+        int[][] pixels = new int[1][1];
+        
         BufferedImage img = null;
         File f = null;
 
@@ -29,10 +33,12 @@ public class rgbToGrayScale {
         try{
           f = new File(name);
           img = ImageIO.read(f);
-                  
-          for(int x = 0; x < img.getWidth(); x++)
+          
+          pixels = new int[img.getWidth()][img.getHeight()];
+          
+          for(int x = 0; x < img.getHeight(); x++)
           {
-              for(int y = 0; y < img.getHeight(); y++)
+              for(int y = 0; y < img.getWidth(); y++)
               {
                   //get pixel value
                   int p = img.getRGB(x,y);
@@ -50,6 +56,8 @@ public class rgbToGrayScale {
                   int b = p & 0xff;
                   
                   int avg = (r+g+b)/3;
+                  
+                  pixels[x][y] = avg;
                   
                   p = (a<<24) | (avg<<16) | (avg<<8) | avg;
                   
@@ -70,6 +78,7 @@ public class rgbToGrayScale {
         }catch(IOException e){
           System.out.println(e);
         }
+        return(pixels);
     } 
     
 }
