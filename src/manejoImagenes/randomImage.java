@@ -19,9 +19,9 @@ import javax.imageio.ImageIO;
 
 public class randomImage 
 {    
-    public int[][] getImage(int width, int height, String name) throws IOException
+    public image getImage(int width, int height, String name) throws IOException
     {
-       int[][] pixels = new int[width][height];
+       image pixels = new image(width,height,"images\\"+name+".png");
        BufferedImage img = new BufferedImage(width, height,  BufferedImage.TYPE_INT_ARGB);
        File f = null;
        
@@ -34,7 +34,7 @@ public class randomImage
                 
                 //Guarda el pixel en escala de grises
                 int p = (a<<24) | (avg<<16) | (avg<<8) | avg;
-                pixels[x][y] = p;
+                pixels.setPixel(x, y, avg);
                 img.setRGB(y, x, p); 
             }
         }
@@ -47,8 +47,6 @@ public class randomImage
         }catch(IOException e){
           System.out.println(e);
         }
-        
         return(pixels);
-      
     }
 }

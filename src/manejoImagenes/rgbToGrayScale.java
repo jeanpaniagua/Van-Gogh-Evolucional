@@ -22,9 +22,9 @@ import javax.imageio.ImageIO;
 
 public class rgbToGrayScale {
 
-    public int[][] getGrayImg(String name) throws IOException
+    public image getGrayImg(String name) throws IOException
     {
-        int[][] pixels = new int[1][1];
+        image pixels = new image(1,1,name);
         
         BufferedImage img = null;
         File f = null;
@@ -34,7 +34,7 @@ public class rgbToGrayScale {
           f = new File(name);
           img = ImageIO.read(f);
           
-          pixels = new int[img.getWidth()][img.getHeight()];
+          pixels = new image(img.getWidth(),img.getHeight(),name);
           
           for(int x = 0; x < img.getHeight(); x++)
           {
@@ -57,7 +57,7 @@ public class rgbToGrayScale {
                   
                   int avg = (r+g+b)/3;
                   
-                  pixels[x][y] = avg;
+                  pixels.setPixel(x, y, avg);
                   
                   p = (a<<24) | (avg<<16) | (avg<<8) | avg;
                   

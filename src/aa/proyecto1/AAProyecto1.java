@@ -7,10 +7,7 @@
 package aa.proyecto1;
 
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 import manejoImagenes.*;
 
 
@@ -18,25 +15,30 @@ import manejoImagenes.*;
  *
  * @author Jean Carlo
  */
+
 public class AAProyecto1 {    
     
-    public static void firstGeneration(int width, int height) throws IOException
-    {
+    public static image[] firstGeneration(int height,int width) throws IOException
+    { 
+        image[] images = new image[10];
+                
         for(int i = 0; i < 10; i++)
         {
             randomImage img = new randomImage(); 
-            img.getImage(width, height, "1."+i);
+            images[i] = img.getImage(height, width, "1."+i);
         }
+        return images;
     }
     
     public static void main(String[] args) throws IOException
     {
-        
         rgbToGrayScale img = new rgbToGrayScale();
-        int[][] pixels = img.getGrayImg("images\\test.png");
+        image pixels = img.getGrayImg("images\\test.png");
         
-        firstGeneration(pixels.length, pixels[0].length);        
+        image[] images = firstGeneration(pixels.getHeight(), pixels.getWidth());
+
         
+   
     }
     
 }
