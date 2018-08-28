@@ -16,10 +16,11 @@ import javax.imageio.ImageIO;
  */
 
 //Lee imagen y la guarda en escala de grises
-public class leerImagen {
-    private int matriz[][];
-    
-    public int[][] cargar() throws IOException
+//Read and imagen and create a new one on gray scale
+
+public class rgbToGrayScale {
+
+    public void cargar() throws IOException
     {
         BufferedImage img = null;
         File f = null;
@@ -54,8 +55,6 @@ public class leerImagen {
                   
                   p = (a<<24) | (avg<<16) | (avg<<8) | avg;
                   
-                  matriz[x][y] = p;
-                  
                   img.setRGB(x, y, p);
                   
                   System.out.print(p);
@@ -73,9 +72,6 @@ public class leerImagen {
         }catch(IOException e){
           System.out.println(e);
         }
-    
-        return matriz;
-    }
-    
+    } 
     
 }
