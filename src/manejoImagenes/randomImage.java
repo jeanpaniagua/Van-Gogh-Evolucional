@@ -38,13 +38,13 @@ public class randomImage
        //write image
         try{
           //La extención se puede cambiar por png/jpg 
-          f = new File("images\\name.png");
+          f = new File("images\\"+name+".png");
           ImageIO.write(img, "png", f);
         }catch(IOException e){
           System.out.println(e);
         }
         
-        return("name.png");
-        
+        return(name+".png");
+      
     }
 }

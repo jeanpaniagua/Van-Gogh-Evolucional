@@ -20,17 +20,15 @@ import javax.imageio.ImageIO;
 
 public class rgbToGrayScale {
 
-    public void cargar() throws IOException
+    public void getGrayImg(String name) throws IOException
     {
         BufferedImage img = null;
         File f = null;
 
         //read image
         try{
-          f = new File("n.jpg");
+          f = new File(name);
           img = ImageIO.read(f);
-          
-          int matriz[][] = new int[img.getWidth()][img.getHeight()];
                   
           for(int x = 0; x < img.getWidth(); x++)
           {
@@ -67,8 +65,8 @@ public class rgbToGrayScale {
         
         //write image
         try{
-          f = new File("Output.jpg");
-          ImageIO.write(img, "jpg", f);
+          f = new File("images\\finalImage.png");
+          ImageIO.write(img, "png", f);
         }catch(IOException e){
           System.out.println(e);
         }
