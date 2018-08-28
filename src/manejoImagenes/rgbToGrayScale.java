@@ -18,23 +18,27 @@ import javax.imageio.ImageIO;
 //Lee imagen y la guarda en escala de grises
 //Read and imagen and create a new one on gray scale
 
+//Return a matrix with the color of each pixel 
+
 public class rgbToGrayScale {
 
-    public void cargar() throws IOException
+    public int[][] getGrayImg(String name) throws IOException
     {
+        int[][] pixels = new int[1][1];
+        
         BufferedImage img = null;
         File f = null;
 
         //read image
         try{
-          f = new File("n.jpg");
+          f = new File(name);
           img = ImageIO.read(f);
           
-          int matriz[][] = new int[img.getWidth()][img.getHeight()];
-                  
-          for(int x = 0; x < img.getWidth(); x++)
+          pixels = new int[img.getWidth()][img.getHeight()];
+          
+          for(int x = 0; x < img.getHeight(); x++)
           {
-              for(int y = 0; y < img.getHeight(); y++)
+              for(int y = 0; y < img.getWidth(); y++)
               {
                   //get pixel value
                   int p = img.getRGB(x,y);
@@ -53,6 +57,8 @@ public class rgbToGrayScale {
                   
                   int avg = (r+g+b)/3;
                   
+                  pixels[x][y] = avg;
+                  
                   p = (a<<24) | (avg<<16) | (avg<<8) | avg;
                   
                   img.setRGB(x, y, p);
@@ -67,11 +73,12 @@ public class rgbToGrayScale {
         
         //write image
         try{
-          f = new File("Output.jpg");
-          ImageIO.write(img, "jpg", f);
+          f = new File("images\\finalImage.png");
+          ImageIO.write(img, "png", f);
         }catch(IOException e){
           System.out.println(e);
         }
+        return(pixels);
     } 
     
 }
