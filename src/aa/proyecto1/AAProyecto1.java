@@ -30,14 +30,37 @@ public class AAProyecto1 {
         return images;
     }
     
+    public static double[] getDifference(image goalImage, image[] generation)
+    {
+        double[] results = new double[generation.length];
+        for(int i = 0; i < generation.length; i++)
+        {
+            double result = 0;
+            for(int x = 0; x < goalImage.getHeight(); x++)
+            {
+                for(int y = 0; y < goalImage.getWidth(); y++)
+                {
+                    result = result + Math.sqrt(Math.pow((goalImage.getPixel(x, y) - generation[i].getPixel(x, y)), 2));
+                }
+            }
+           results[i] = result;
+        }
+        return results;
+    }
+    
     public static void main(String[] args) throws IOException
     {
         rgbToGrayScale img = new rgbToGrayScale();
-        image pixels = img.getGrayImg("images\\test.png");
+        image goalImage = img.getGrayImg("images\\test.png");
         
-        image[] images = firstGeneration(pixels.getHeight(), pixels.getWidth());
-
+        image[] generation = firstGeneration(goalImage.getHeight(), goalImage.getWidth());
+       
+        double[] difference = getDifference(goalImage, generation);
         
+        for(int i = 0; i < difference.length; i++)
+        {
+            System.out.println(difference[i]);
+        }
    
     }
     

@@ -62,10 +62,7 @@ public class rgbToGrayScale {
                   p = (a<<24) | (avg<<16) | (avg<<8) | avg;
                   
                   img.setRGB(x, y, p);
-                  
-                  System.out.print(p);
               }
-              System.out.print("\n");
           }
         }catch(IOException e){
           System.out.println(e);
