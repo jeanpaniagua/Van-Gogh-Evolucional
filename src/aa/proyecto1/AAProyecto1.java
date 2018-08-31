@@ -9,7 +9,7 @@ package aa.proyecto1;
 
 import java.io.IOException;
 import manejoImagenes.*;
-
+import interfaz.*;
 
 /**
  *
@@ -48,8 +48,9 @@ public class AAProyecto1 {
         return results;
     }
     
-    public static void main(String[] args) throws IOException
-    {
+    public static void main(String[] args) throws IOException{
+        interfaz Ventana = new interfaz();
+        Ventana.setVisible(true);
         rgbToGrayScale img = new rgbToGrayScale();
         image goalImage = img.getGrayImg("images\\test.png");
         
