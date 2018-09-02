@@ -170,6 +170,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Crear Imagen Random"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="randomCreateActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="convertor">
       <Properties>
@@ -183,6 +186,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mutar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mutateActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

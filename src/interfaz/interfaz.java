@@ -6,8 +6,14 @@
 package interfaz;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import manejoImagenes.randomImage;
+import manejoImagenes.rgbToGrayScale;
 
 /**
  *
@@ -15,8 +21,11 @@ import javax.swing.ImageIcon;
  */
 public class interfaz extends javax.swing.JFrame {
     
-    cargaImagenes imagen = new cargaImagenes();
-    Icon selectedImg = new ImageIcon();
+    private cargaImagenes imagen = new cargaImagenes();
+    private BufferedImage img = null;
+    private File imgSelec = null;
+    private BufferedImage randomImg = null;
+    private File imgRand = null;
             
     public interfaz() {
         initComponents();
@@ -97,6 +106,11 @@ public class interfaz extends javax.swing.JFrame {
         });
 
         randomCreate.setText("Crear Imagen Random");
+        randomCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                randomCreateActionPerformed(evt);
+            }
+        });
 
         convertor.setText("Convertir a Grises");
         convertor.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +120,11 @@ public class interfaz extends javax.swing.JFrame {
         });
 
         mutate.setText("Mutar");
+        mutate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mutateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,17 +170,54 @@ public class interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void imageSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imageSelectActionPerformed
-        ImageIcon img = new ImageIcon(imagen.buscador());
-        selectedImg = new ImageIcon(img.getImage().getScaledInstance(lblSeleccionada.getWidth(), lblSeleccionada.getHeight(),
-                Image.SCALE_DEFAULT));
-        lblSeleccionada.setIcon(selectedImg);
+        imgSelec = imagen.buscador();
+        try {
+            img = ImageIO.read(imgSelec);
+        } catch (IOException e){
+            System.out.println(e);
+        }
+        ImageIcon selectedImg = new ImageIcon(img);
+        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
+                lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
+        lblSeleccionada.setIcon(selectedIcon);
         convertor.setEnabled(true);
     }//GEN-LAST:event_imageSelectActionPerformed
 
     private void convertorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertorActionPerformed
-        
+        rgbToGrayScale toGray = new rgbToGrayScale();
+        try {
+           imgSelec = toGray.convertGray(imgSelec);
+           img = ImageIO.read(imgSelec);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        ImageIcon selectedImg = new ImageIcon(img);
+        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblMeta.getWidth(), lblMeta.getHeight(), 
+                Image.SCALE_DEFAULT));
+        lblMeta.setIcon(selectedIcon);
         imageSelect.setEnabled(false);
+        convertor.setEnabled(false);
+        randomCreate.setEnabled(true);
     }//GEN-LAST:event_convertorActionPerformed
+
+    private void randomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomCreateActionPerformed
+        randomImage randImg = new randomImage();
+        try {
+           imgRand = randImg.getImage(32, 32);
+           randomImg = ImageIO.read(imgRand);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        ImageIcon selectedImg = new ImageIcon(randomImg);
+        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
+                lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
+        lblSeleccionada.setIcon(selectedIcon);
+        mutate.setEnabled(true);
+    }//GEN-LAST:event_randomCreateActionPerformed
+
+    private void mutateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutateActionPerformed
+        randomCreate.setEnabled(false);
+    }//GEN-LAST:event_mutateActionPerformed
 
     /**
      * @param args the command line arguments

@@ -21,24 +21,25 @@ public class cargaImagenes {
     
     //private BufferedImage imagenCargada;
     
-    public BufferedImage buscador(){
+    public File buscador(){
         
         BufferedImage img = null;
+        File imagenSeleccionada = null;
         JFileChooser buscador = new JFileChooser();
         buscador.setDialogTitle("Seleccione una imagen");
-        FileNameExtensionFilter extension = new FileNameExtensionFilter("PNG", "png");
+        FileNameExtensionFilter extension = new FileNameExtensionFilter("PNG & JPG & GIF & BMP", "png", "jpg", "gif", "bmp");
         buscador.setFileFilter(extension);
         int flag=buscador.showOpenDialog(null);
         if(flag==JFileChooser.APPROVE_OPTION){
             try{
-                File imagenSeleccionada=buscador.getSelectedFile();
-                img = ImageIO.read(imagenSeleccionada);
+                imagenSeleccionada = buscador.getSelectedFile();
+                //img = ImageIO.read(imagenSeleccionada);
             }
             catch (Exception e){
             }
         }
         //imagenCargada=img;
-        return img;
+        return imagenSeleccionada;
     }
     
 }

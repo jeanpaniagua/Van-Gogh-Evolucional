@@ -18,7 +18,7 @@ import interfaz.*;
 
 public class AAProyecto1 {    
     
-    public static image[] firstGeneration(int height,int width) throws IOException
+    /*public static image[] firstGeneration(int height,int width) throws IOException
     { 
         image[] images = new image[10];
                 
@@ -28,7 +28,7 @@ public class AAProyecto1 {
             images[i] = img.getImage(height, width, "1."+i);
         }
         return images;
-    }
+    }*/
     
     public static double[] getDifference(image goalImage, image[] generation)
     {
@@ -51,7 +51,7 @@ public class AAProyecto1 {
     public static void main(String[] args) throws IOException{
         interfaz Ventana = new interfaz();
         Ventana.setVisible(true);
-        rgbToGrayScale img = new rgbToGrayScale();
+        /*rgbToGrayScale img = new rgbToGrayScale();
         image goalImage = img.getGrayImg("images\\test.png");
         
         image[] generation = firstGeneration(goalImage.getHeight(), goalImage.getWidth());
@@ -61,7 +61,7 @@ public class AAProyecto1 {
         for(int i = 0; i < difference.length; i++)
         {
             System.out.println(difference[i]);
-        }
+        }*/
    
     }
     

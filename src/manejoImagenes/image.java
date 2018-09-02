@@ -20,6 +20,11 @@ public class image {
         this.name = name;
     }
 
+    public image(int height, int width) 
+    {
+        this.pixeles = new int[height][width];
+    }
+    
     public int[][] getPixeles() 
     {
         return pixeles;
