@@ -186,7 +186,7 @@ public class interfaz extends javax.swing.JFrame {
     private void convertorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertorActionPerformed
         rgbToGrayScale toGray = new rgbToGrayScale();
         try {
-           imgSelec = toGray.convertGray(imgSelec);
+           //imgSelec = toGray.convertGray(imgSelec);
            img = ImageIO.read(imgSelec);
         } catch (IOException e) {
             System.out.println(e);
@@ -203,7 +203,7 @@ public class interfaz extends javax.swing.JFrame {
     private void randomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomCreateActionPerformed
         randomImage randImg = new randomImage();
         try {
-           imgRand = randImg.getImage(32, 32);
+           //imgRand = randImg.getImage(32, 32);
            randomImg = ImageIO.read(imgRand);
         } catch (IOException e) {
             System.out.println(e);

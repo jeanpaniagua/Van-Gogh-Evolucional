@@ -18,7 +18,10 @@ import interfaz.*;
 
 public class AAProyecto1 {    
     
-    /*public static image[] firstGeneration(int height,int width) throws IOException
+    static double mutationProbability = 50;
+            
+            
+    public static image[] firstGeneration(int height,int width) throws IOException
     { 
         image[] images = new image[10];
                 
@@ -28,7 +31,7 @@ public class AAProyecto1 {
             images[i] = img.getImage(height, width, "1."+i);
         }
         return images;
-    }*/
+    }
     
     public static double[] getDifference(image goalImage, image[] generation)
     {
@@ -48,20 +51,63 @@ public class AAProyecto1 {
         return results;
     }
     
+    public static void mutate(image img, image goalImage, String name)
+    {
+        image pixels = new image(img.getHeight(),img.getWidth(),name);
+                
+        for(int x = 0; x < img.getHeight(); x++)
+        {
+            for(int y = 0; y < img.getWidth(); y++)
+            {
+                if(Math.sqrt(Math.pow((goalImage.getPixel(x, y) - img.getPixel(x, y)), 2)) == 0)
+                {
+                    pixels.setPixel(x, y, img.getPixel(x, y));
+                }
+                else
+                {
+                    if(Math.random()*100<=mutationProbability)
+                    {             
+                        int avg = (int)(Math.random()*256);
+                        pixels.setPixel(x, y, avg);
+                    }
+                }
+            }
+        }
+        
+        
+        
+    }
+    
     public static void main(String[] args) throws IOException{
         interfaz Ventana = new interfaz();
         Ventana.setVisible(true);
-        /*rgbToGrayScale img = new rgbToGrayScale();
+        
+        
+        rgbToGrayScale img = new rgbToGrayScale();
         image goalImage = img.getGrayImg("images\\test.png");
         
         image[] generation = firstGeneration(goalImage.getHeight(), goalImage.getWidth());
        
         double[] difference = getDifference(goalImage, generation);
         
-        for(int i = 0; i < difference.length; i++)
+        /*for(int i = 0; i < difference.length; i++)
         {
             System.out.println(difference[i]);
         }*/
+        
+        
+        double bestGenes = difference[0];
+
+        for(int i = 0; i < difference.length; i++)
+        {
+            System.out.println(difference[i] + "    " + bestGenes);
+            if(difference[i] < bestGenes)
+            {
+                bestGenes = difference[i];
+            }
+        }
+        
+        System.out.println("Best: " + bestGenes);
    
     }
     
