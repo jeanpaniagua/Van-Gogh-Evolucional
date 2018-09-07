@@ -145,7 +145,7 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
 
-        randomCreate.setText("Evolucionar");
+        randomCreate.setText("Iniciar Programa");
         randomCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 randomCreateActionPerformed(evt);
@@ -179,7 +179,7 @@ public class interfaz extends javax.swing.JFrame {
                             .addComponent(imageSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(7, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(randomCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -226,7 +226,7 @@ public class interfaz extends javax.swing.JFrame {
     private void convertorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertorActionPerformed
         rgbToGrayScale toGray = new rgbToGrayScale();
         try{
-           toGray.getGrayImg(imgSelec);
+           AAProyecto1.goalImage = toGray.getGrayImg(imgSelec);
            imgSelec = new File("images\\finalImage.png");
            img = ImageIO.read(imgSelec);
         }catch (IOException e){
@@ -244,11 +244,10 @@ public class interfaz extends javax.swing.JFrame {
     private void randomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomCreateActionPerformed
         try{
             AAProyecto1.generation = firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
+            AAProyecto1.startProgram();
         }catch (IOException ex) {
             System.out.println(ex);
         }
-        interfaceThread thread = new interfaceThread();
-        thread.run();
         mutate.setEnabled(true);
     }//GEN-LAST:event_randomCreateActionPerformed
 

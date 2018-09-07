@@ -22,8 +22,9 @@ import javax.imageio.ImageIO;
 
 public class AAProyecto1 {    
     
+    public static image goalImage;
     public static image[] generation;
-    public static ArrayList<String> paths = new ArrayList();
+    public static ArrayList<image> optimos = new ArrayList();
     
     public static image[] firstGeneration(int height,int width, int tamPob) throws IOException{
         image[] images = new image[tamPob];
@@ -34,22 +35,20 @@ public class AAProyecto1 {
         return images;
     }
     
-    public static double[] getDifference(image goalImage, image[] generation)
+    public static void getDifference(image goalImage, image[] generation)
     {
-        double[] results = new double[generation.length];
         for(int i = 0; i < generation.length; i++)
         {
-            double result = 0;
+            int result = 0;
             for(int x = 0; x < goalImage.getHeight(); x++)
             {
                 for(int y = 0; y < goalImage.getWidth(); y++)
                 {
-                    result = result + Math.sqrt(Math.pow((goalImage.getPixel(x, y) - generation[i].getPixel(x, y)), 2));
+                    result = result + (int)Math.sqrt(Math.pow((goalImage.getPixel(x, y) - generation[i].getPixel(x, y)), 2));
                 }
             }
-           results[i] = result;
+            generation[i].setDifference(result);
         }
-        return results;
     }
     
     public static void mutate(image img, image goalImage, String name)
@@ -65,15 +64,13 @@ public class AAProyecto1 {
                 int p = 0;
                 if(Math.sqrt(Math.pow((goalImage.getPixel(x, y) - img.getPixel(x, y)), 2)) == 0)
                 {
-                    p = img.getPixel(x, y);
-                    
+                    p = img.getPixel(x, y); 
                 }
                 else
                 {
                     if(Math.random()*100<=menuInicial.PORCENTAJE_MUTACION)
                     {             
                         p = (int)(Math.random()*256);
-                        
                     }
                     else
                     {
@@ -92,6 +89,42 @@ public class AAProyecto1 {
         }catch(IOException e){
           System.out.println(e);
         }        
+    }
+    
+    public static void startProgram()
+    {
+        Boolean stop = false;
+        
+        while(!stop)
+        {
+            getDifference(goalImage, generation); 
+            
+            image bestGenes = generation[0];
+
+            for(int i = 0; i < generation.length; i++)
+            {
+                if(generation[i].getDifference() < bestGenes.getDifference())
+                {
+                    bestGenes = generation[i];
+                }
+            }
+            
+            optimos.add(bestGenes);
+            
+            for(int i = 0; i < generation.length; i++){
+                int choose = (int)(Math.random()*2)+1;
+                if(choose == 1){
+                    System.out.println("Mutar");
+                }else if(choose == 2){
+                    System.out.println("Cruzar");
+                }
+            }
+            
+            for(image gen: generation){
+                if(gen.getDifference() >= 0 && gen.getDifference() <= 0.1)
+                stop = true;
+            }
+        }
     }
     
     public static void main(String[] args) throws IOException{
