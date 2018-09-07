@@ -10,6 +10,7 @@ package aa.proyecto1;
 import java.io.IOException;
 import manejoImagenes.*;
 import interfaz.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,17 +19,16 @@ import interfaz.*;
 
 public class AAProyecto1 {    
     
-    /*public static image[] firstGeneration(int height,int width) throws IOException
-    { 
-        image[] images = new image[10];
-                
-        for(int i = 0; i < 10; i++)
-        {
+    public static ArrayList<String> paths = new ArrayList();
+    
+    public static image[] firstGeneration(int height,int width, int tamPob) throws IOException{
+        image[] images = new image[tamPob];
+        for(int i = 0; i < tamPob; i++){
             randomImage img = new randomImage(); 
             images[i] = img.getImage(height, width, "1."+i);
         }
         return images;
-    }*/
+    }
     
     public static double[] getDifference(image goalImage, image[] generation)
     {
@@ -49,7 +49,7 @@ public class AAProyecto1 {
     }
     
     public static void main(String[] args) throws IOException{
-        interfaz Ventana = new interfaz();
+        menuInicial Ventana = new menuInicial();
         Ventana.setVisible(true);
         /*rgbToGrayScale img = new rgbToGrayScale();
         image goalImage = img.getGrayImg("images\\test.png");

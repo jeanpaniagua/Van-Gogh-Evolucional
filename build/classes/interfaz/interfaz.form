@@ -168,7 +168,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="randomCreate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Crear Imagen Random"/>
+        <Property name="text" type="java.lang.String" value="Evolucionar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="randomCreateActionPerformed"/>
@@ -184,7 +184,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="mutate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mutar"/>
+        <Property name="text" type="java.lang.String" value="Mostrar Resultados"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mutateActionPerformed"/>

@@ -5,10 +5,13 @@
  */
 package interfaz;
 
+import static aa.proyecto1.AAProyecto1.firstGeneration;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -105,7 +108,7 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
 
-        randomCreate.setText("Crear Imagen Random");
+        randomCreate.setText("Evolucionar");
         randomCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 randomCreateActionPerformed(evt);
@@ -119,7 +122,7 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
 
-        mutate.setText("Mutar");
+        mutate.setText("Mostrar Resultados");
         mutate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mutateActionPerformed(evt);
@@ -185,10 +188,11 @@ public class interfaz extends javax.swing.JFrame {
 
     private void convertorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertorActionPerformed
         rgbToGrayScale toGray = new rgbToGrayScale();
-        try {
-           imgSelec = toGray.convertGray(imgSelec);
+        try{
+           toGray.getGrayImg(imgSelec);
+           imgSelec = new File("images\\finalImage.png");
            img = ImageIO.read(imgSelec);
-        } catch (IOException e) {
+        }catch (IOException e){
             System.out.println(e);
         }
         ImageIcon selectedImg = new ImageIcon(img);
@@ -201,17 +205,23 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_convertorActionPerformed
 
     private void randomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomCreateActionPerformed
-        randomImage randImg = new randomImage();
-        try {
-           imgRand = randImg.getImage(32, 32);
-           randomImg = ImageIO.read(imgRand);
-        } catch (IOException e) {
-            System.out.println(e);
+        try{
+            firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
+        }catch (IOException ex) {
+            System.out.println(ex);
         }
-        ImageIcon selectedImg = new ImageIcon(randomImg);
-        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
-                lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
-        lblSeleccionada.setIcon(selectedIcon);
+//        randomImage randImg = new randomImage();
+//        try {
+//           randImg.getImage(32, 32, "1.0");
+//           imgRand = new File("images\\random1.0.png");
+//           randomImg = ImageIO.read(imgRand);
+//        } catch (IOException e) {
+//            System.out.println(e);
+//        }
+//        ImageIcon selectedImg = new ImageIcon(randomImg);
+//        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
+//                lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
+//        lblSeleccionada.setIcon(selectedIcon);
         mutate.setEnabled(true);
     }//GEN-LAST:event_randomCreateActionPerformed
 
