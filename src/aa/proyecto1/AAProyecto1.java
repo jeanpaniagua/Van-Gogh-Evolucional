@@ -112,7 +112,6 @@ public class AAProyecto1 {
             optimos.add(bestGenes);
             
             
-            
                         
             
             stop = true;
