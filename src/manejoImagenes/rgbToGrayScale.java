@@ -23,9 +23,9 @@ import javax.imageio.ImageIO;
 
 public class rgbToGrayScale {
     
-    /*public File convertGray(File f) throws IOException
+    public image getGrayImg(File f) throws IOException
     {
-        image pixels = new image(1,1);
+        image pixels = new image(1,1,"images\\finalImage.png");
         
         BufferedImage img = null;
 
@@ -33,63 +33,7 @@ public class rgbToGrayScale {
         try{
           img = ImageIO.read(f);
           
-          pixels = new image(img.getWidth(),img.getHeight());
-          
-          for(int x = 0; x < img.getHeight(); x++)
-          {
-              for(int y = 0; y < img.getWidth(); y++)
-              {
-                  //get pixel value
-                  int p = img.getRGB(x,y);
-                  
-                  //get alpha
-                  int a = (p>>24)&0xff;
-                  
-                  //get red
-                  int r = (p>>16) & 0xff;
-
-                  //get green
-                  int g = (p>>8) & 0xff;
-
-                  //get blue
-                  int b = p & 0xff;
-                  
-                  int avg = (r+g+b)/3;
-                  
-                  pixels.setPixel(x, y, avg);
-                  
-                  p = (a<<24) | (avg<<16) | (avg<<8) | avg;
-                  
-                  img.setRGB(x, y, p);
-              }
-          }
-        }catch(IOException e){
-          System.out.println(e);
-        }
-        
-        //write image
-        try{
-          f = new File("images\\finalImage.png");
-          ImageIO.write(img, "png", f);
-        }catch(IOException e){
-          System.out.println(e);
-        }
-        return(f);
-    }*/
-    
-    public image getGrayImg(String name) throws IOException
-    {
-        image pixels = new image(1,1,"finalImage.png");
-        
-        BufferedImage img = null;
-        File f = null;
-
-        //read image
-        try{
-          f = new File(name);
-          img = ImageIO.read(f);
-          
-          pixels = new image(img.getWidth(),img.getHeight(),"finalImage.png");
+          pixels = new image(img.getWidth(),img.getHeight(),"images\\finalImage.png");
           
           for(int x = 0; x < img.getHeight(); x++)
           {

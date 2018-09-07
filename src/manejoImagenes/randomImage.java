@@ -26,15 +26,12 @@ public class randomImage
        BufferedImage img = new BufferedImage(width, height,  BufferedImage.TYPE_INT_ARGB);
        File f = null;
        
-       for (int x = 0; x < height; x++)
-        {
-            for (int y = 0; y < width; y++)
-            {
-                int a = (int)(Math.random()*256);              
+       for (int x = 0; x < height; x++){
+            for (int y = 0; y < width; y++){
                 int avg = (int)(Math.random()*256);
                 
                 //Guarda el pixel en escala de grises
-                int p = (a<<24) | (avg<<16) | (avg<<8) | avg;
+                int p = (255<<24) | (avg<<16) | (avg<<8) | avg;
                 pixels.setPixel(x, y, avg);
                 img.setRGB(y, x, p); 
             }
@@ -42,7 +39,6 @@ public class randomImage
        
        //write image
         try{
-          //La extención se puede cambiar por png/jpg 
           f = new File("images\\random.png");
           ImageIO.write(img, "png", f);
         }catch(IOException e){
@@ -53,7 +49,8 @@ public class randomImage
     
     public image getImage(int width, int height, String name) throws IOException
     {
-       image pixels = new image(width,height,"images\\"+name+".png");
+        System.out.println(name);
+       image pixels = new image(width,height,"images\\random"+name+".png");
        BufferedImage img = new BufferedImage(width, height,  BufferedImage.TYPE_INT_ARGB);
        File f = null;
        
@@ -72,7 +69,7 @@ public class randomImage
        //write image
         try{
           //La extención se puede cambiar por png/jpg 
-          f = new File("images\\"+name+".png");
+          f = new File("images\\random"+name+".png");
           ImageIO.write(img, "png", f);
         }catch(IOException e){
           System.out.println(e);

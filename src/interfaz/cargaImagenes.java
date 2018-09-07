@@ -5,11 +5,7 @@
  */
 package interfaz;
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -23,7 +19,6 @@ public class cargaImagenes {
     
     public File buscador(){
         
-        BufferedImage img = null;
         File imagenSeleccionada = null;
         JFileChooser buscador = new JFileChooser();
         buscador.setDialogTitle("Seleccione una imagen");
@@ -33,12 +28,11 @@ public class cargaImagenes {
         if(flag==JFileChooser.APPROVE_OPTION){
             try{
                 imagenSeleccionada = buscador.getSelectedFile();
-                //img = ImageIO.read(imagenSeleccionada);
             }
             catch (Exception e){
+                System.out.println(e);
             }
         }
-        //imagenCargada=img;
         return imagenSeleccionada;
     }
     

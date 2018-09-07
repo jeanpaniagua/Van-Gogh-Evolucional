@@ -10,6 +10,8 @@ package aa.proyecto1;
 import java.io.IOException;
 import manejoImagenes.*;
 import interfaz.*;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,14 +21,11 @@ import interfaz.*;
 public class AAProyecto1 {    
     
     static double mutationProbability = 50;
-            
-            
-    public static image[] firstGeneration(int height,int width) throws IOException
-    { 
-        image[] images = new image[10];
-                
-        for(int i = 0; i < 10; i++)
-        {
+    public static ArrayList<String> paths = new ArrayList();
+    
+    public static image[] firstGeneration(int height,int width, int tamPob) throws IOException{
+        image[] images = new image[tamPob];
+        for(int i = 0; i < tamPob; i++){
             randomImage img = new randomImage(); 
             images[i] = img.getImage(height, width, "1."+i);
         }
@@ -79,14 +78,15 @@ public class AAProyecto1 {
     }
     
     public static void main(String[] args) throws IOException{
-        interfaz Ventana = new interfaz();
+        menuInicial Ventana = new menuInicial();
         Ventana.setVisible(true);
         
         
         rgbToGrayScale img = new rgbToGrayScale();
-        image goalImage = img.getGrayImg("images\\test.png");
+        File f = new File("images\\finalImage.png");
+        image goalImage = img.getGrayImg(f);
         
-        image[] generation = firstGeneration(goalImage.getHeight(), goalImage.getWidth());
+        image[] generation = firstGeneration(goalImage.getHeight(), goalImage.getWidth(), 10);
        
         double[] difference = getDifference(goalImage, generation);
         
