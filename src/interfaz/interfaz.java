@@ -5,6 +5,7 @@
  */
 package interfaz;
 
+import aa.proyecto1.AAProyecto1;
 import static aa.proyecto1.AAProyecto1.firstGeneration;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -204,7 +205,7 @@ public class interfaz extends javax.swing.JFrame {
 
     private void randomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomCreateActionPerformed
         try{
-            firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
+            AAProyecto1.generation = firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
         }catch (IOException ex) {
             System.out.println(ex);
         }

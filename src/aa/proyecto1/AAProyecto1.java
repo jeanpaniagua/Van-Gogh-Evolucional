@@ -10,8 +10,10 @@ package aa.proyecto1;
 import java.io.IOException;
 import manejoImagenes.*;
 import interfaz.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 
 public class AAProyecto1 {    
     
-    static double mutationProbability = 50;
+    public static image[] generation;
     public static ArrayList<String> paths = new ArrayList();
     
     public static image[] firstGeneration(int height,int width, int tamPob) throws IOException{
@@ -52,51 +54,59 @@ public class AAProyecto1 {
     
     public static void mutate(image img, image goalImage, String name)
     {
-        image pixels = new image(img.getHeight(),img.getWidth(),name);
-                
-        for(int x = 0; x < img.getHeight(); x++)
+        image pixels = new image(img.getWidth(), img.getHeight(),name);
+        BufferedImage newImg = new BufferedImage(img.getWidth(), img.getHeight(),  BufferedImage.TYPE_INT_ARGB);
+        File f = null;
+       
+        for(int x = 0; x < img.getWidth(); x++)
         {
-            for(int y = 0; y < img.getWidth(); y++)
+            for(int y = 0; y < img.getHeight(); y++)
             {
+                int p = 0;
                 if(Math.sqrt(Math.pow((goalImage.getPixel(x, y) - img.getPixel(x, y)), 2)) == 0)
                 {
-                    pixels.setPixel(x, y, img.getPixel(x, y));
+                    p = img.getPixel(x, y);
+                    
                 }
                 else
                 {
-                    if(Math.random()*100<=mutationProbability)
+                    if(Math.random()*100<=menuInicial.PORCENTAJE_MUTACION)
                     {             
-                        int avg = (int)(Math.random()*256);
-                        pixels.setPixel(x, y, avg);
+                        p = (int)(Math.random()*256);
+                        
+                    }
+                    else
+                    {
+                        p = img.getPixel(x, y);
                     }
                 }
+                pixels.setPixel(x, y, p);
+                newImg.setRGB(y, x, p); 
             }
         }
         
-        
-        
+        //write image
+        try{
+          f = new File("images\\"+name+".png");
+          ImageIO.write(newImg, "png", f);
+        }catch(IOException e){
+          System.out.println(e);
+        }        
     }
     
     public static void main(String[] args) throws IOException{
         menuInicial Ventana = new menuInicial();
         Ventana.setVisible(true);
         
+        /*double[] difference = getDifference(goalImage, generation);
         
-        rgbToGrayScale img = new rgbToGrayScale();
-        File f = new File("images\\finalImage.png");
-        image goalImage = img.getGrayImg(f);
-        
-        image[] generation = firstGeneration(goalImage.getHeight(), goalImage.getWidth(), 10);
-       
-        double[] difference = getDifference(goalImage, generation);
-        
-        /*for(int i = 0; i < difference.length; i++)
+        for(int i = 0; i < difference.length; i++)
         {
             System.out.println(difference[i]);
         }*/
         
         
-        double bestGenes = difference[0];
+       /* double bestGenes = difference[0];
 
         for(int i = 0; i < difference.length; i++)
         {
@@ -107,8 +117,7 @@ public class AAProyecto1 {
             }
         }
         
-        System.out.println("Best: " + bestGenes);
-   
+        System.out.println("Best: " + bestGenes);*/   
     }
     
 }
