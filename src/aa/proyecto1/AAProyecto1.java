@@ -23,7 +23,6 @@ import javax.imageio.ImageIO;
 public class AAProyecto1 {    
     
     public static image[] generation;
-    
     public static ArrayList<String> paths = new ArrayList();
     
     public static image[] firstGeneration(int height,int width, int tamPob) throws IOException{
@@ -53,7 +52,7 @@ public class AAProyecto1 {
         return results;
     }
     
-    public static image mutate(image img, image goalImage, String name)
+    public static void mutate(image img, image goalImage, String name)
     {
         image pixels = new image(img.getWidth(), img.getHeight(),name);
         BufferedImage newImg = new BufferedImage(img.getWidth(), img.getHeight(),  BufferedImage.TYPE_INT_ARGB);
@@ -85,65 +84,14 @@ public class AAProyecto1 {
                 newImg.setRGB(y, x, p); 
             }
         }
+        
         //write image
         try{
           f = new File("images\\"+name+".png");
           ImageIO.write(newImg, "png", f);
         }catch(IOException e){
           System.out.println(e);
-        }  
-        
-        return (pixels);
-    }
-    
-    public static image[] crossover(image img1, image img2, String name1, String name2)
-    {
-        image result1 = new image(img1.getWidth(), img1.getHeight(),name1);
-        image result2 = new image(img1.getWidth(), img1.getHeight(),name2);
-        
-        image[] result = new image[2];
-        
-        BufferedImage newImg1 = new BufferedImage(img1.getWidth(), img1.getHeight(),  BufferedImage.TYPE_INT_ARGB);
-        File f1 = null;
-        
-        BufferedImage newImg2 = new BufferedImage(img1.getWidth(), img1.getHeight(),  BufferedImage.TYPE_INT_ARGB);
-        File f2 = null;
-        
-        for(int x = 0; x < img1.getWidth(); x++)
-        {
-            for(int y = 0; y < img1.getHeight()/2; y++)
-            {
-                int p = img1.getPixel(x, y);
-                result1.setPixel(x, y, p);
-                newImg1.setRGB(x, y, p);
-                
-                p = img2.getPixel(x, y);
-                result2.setPixel(x, y, p);
-                newImg2.setRGB(x, y, p);
-            }     
-            for(int y = img1.getHeight()/2; y < img1.getHeight(); y++)
-            {
-                int p = img2.getPixel(x, y);
-                result1.setPixel(x, y, p);
-                newImg1.setRGB(x, y, p);
-                
-                p = img1.getPixel(x, y);
-                result2.setPixel(x, y, p);
-                newImg2.setRGB(x, y, p);
-            } 
-        }
-        try{
-          f1 = new File("images\\"+name1+".png");
-          ImageIO.write(newImg1, "png", f1);
-          f2 = new File("images\\"+name2+".png");
-          ImageIO.write(newImg1, "png", f2);
-        }catch(IOException e){
-          System.out.println(e);
-        }
-        
-        result[0]=result1;
-        result[1]=result2;
-        return(result);
+        }        
     }
     
     public static void main(String[] args) throws IOException{

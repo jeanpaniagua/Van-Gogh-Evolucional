@@ -7,6 +7,7 @@ package interfaz;
 
 import aa.proyecto1.AAProyecto1;
 import static aa.proyecto1.AAProyecto1.firstGeneration;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,7 +15,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import manejoImagenes.randomImage;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import manejoImagenes.rgbToGrayScale;
 
 /**
@@ -23,11 +26,9 @@ import manejoImagenes.rgbToGrayScale;
  */
 public class interfaz extends javax.swing.JFrame {
     
-    private cargaImagenes imagen = new cargaImagenes();
-    private BufferedImage img = null;
-    private File imgSelec = null;
-    private BufferedImage randomImg = null;
-    private File imgRand = null;
+    public cargaImagenes imagen = new cargaImagenes();
+    public BufferedImage img = null;
+    public File imgSelec = null;
             
     public interfaz() {
         initComponents();
@@ -36,6 +37,43 @@ public class interfaz extends javax.swing.JFrame {
         mutate.setEnabled(false);
     }
 
+    class interfaceThread extends Thread{
+        @Override
+        public void run(){
+            BufferedImage randomImg = null;
+//            while(optimo){
+                for(int i = 0; i < AAProyecto1.generation.length; i++){
+                    try{
+                       String path = AAProyecto1.generation[i].getName();
+                        System.out.println("entra: "+i);
+                       File imgRand = new File(path);
+                       randomImg = ImageIO.read(imgRand);
+                       ImageIcon selectedImg = new ImageIcon(randomImg);
+                       Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
+                               lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
+                       lblSeleccionada.setIcon(selectedIcon);
+                       this.sleep(100);
+                    }catch (IOException e){
+                        System.out.println(e);
+                    }catch (InterruptedException ex){
+                        System.out.println(ex);
+                    }
+                }
+//           }
+        }
+    }
+
+    public interfaz(JButton convertor, JButton imageSelect, JLabel lblMeta, JLabel lblSeleccionada, JButton mutate, JPanel panel1, JPanel panel2, JButton randomCreate) throws HeadlessException {
+        this.convertor = convertor;
+        this.imageSelect = imageSelect;
+        this.lblMeta = lblMeta;
+        this.lblSeleccionada = lblSeleccionada;
+        this.mutate = mutate;
+        this.panel1 = panel1;
+        this.panel2 = panel2;
+        this.randomCreate = randomCreate;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -209,23 +247,13 @@ public class interfaz extends javax.swing.JFrame {
         }catch (IOException ex) {
             System.out.println(ex);
         }
-//        randomImage randImg = new randomImage();
-//        try {
-//           randImg.getImage(32, 32, "1.0");
-//           imgRand = new File("images\\random1.0.png");
-//           randomImg = ImageIO.read(imgRand);
-//        } catch (IOException e) {
-//            System.out.println(e);
-//        }
-//        ImageIcon selectedImg = new ImageIcon(randomImg);
-//        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
-//                lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
-//        lblSeleccionada.setIcon(selectedIcon);
+        interfaceThread thread = new interfaceThread();
+        thread.run();
         mutate.setEnabled(true);
     }//GEN-LAST:event_randomCreateActionPerformed
 
     private void mutateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutateActionPerformed
-        randomCreate.setEnabled(false);
+        //randomCreate.setEnabled(false);
     }//GEN-LAST:event_mutateActionPerformed
 
     /**
