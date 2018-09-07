@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 
 public class rgbToGrayScale {
     
-    public File convertGray(File f) throws IOException
+    /*public File convertGray(File f) throws IOException
     {
         image pixels = new image(1,1);
         
@@ -75,11 +75,11 @@ public class rgbToGrayScale {
           System.out.println(e);
         }
         return(f);
-    }
+    }*/
     
-    /*public image getGrayImg(String name) throws IOException
+    public image getGrayImg(String name) throws IOException
     {
-        image pixels = new image(1,1,name);
+        image pixels = new image(1,1,"finalImage.png");
         
         BufferedImage img = null;
         File f = null;
@@ -89,7 +89,7 @@ public class rgbToGrayScale {
           f = new File(name);
           img = ImageIO.read(f);
           
-          pixels = new image(img.getWidth(),img.getHeight(),name);
+          pixels = new image(img.getWidth(),img.getHeight(),"finalImage.png");
           
           for(int x = 0; x < img.getHeight(); x++)
           {
@@ -131,6 +131,6 @@ public class rgbToGrayScale {
           System.out.println(e);
         }
         return(pixels);
-    } */
+    } 
     
 }
