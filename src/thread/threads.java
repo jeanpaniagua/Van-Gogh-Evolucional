@@ -5,6 +5,13 @@
  */
 package thread;
 
+import interfaz.menuInicial;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import manejoImagenes.image;
+
 /**
  *
  * @author curso
@@ -12,5 +19,9 @@ package thread;
 public class threads extends Thread{
     
     
-    
+    @Override
+    public void run() {
+            
+    }    
+ 
 }

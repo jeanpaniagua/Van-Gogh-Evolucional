@@ -12,12 +12,21 @@ package manejoImagenes;
 public class image {
     private int[][] pixeles;
     private String name;
-    
 
+    public int getDifference() {
+        return difference;
+    }
+
+    public void setDifference(int difference) {
+        this.difference = difference;
+    }
+    private int difference;
+   
     public image(int height, int width, String name) 
     {
         this.pixeles = new int[height][width];
         this.name = name;
+        this.difference = 0;
     }
 
     public image(int height, int width) 
