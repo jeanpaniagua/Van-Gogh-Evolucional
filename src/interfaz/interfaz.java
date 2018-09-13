@@ -26,7 +26,7 @@ import manejoImagenes.rgbToGrayScale;
  */
 public class interfaz extends javax.swing.JFrame {
     
-    public cargaImagenes imagen = new cargaImagenes();
+    public cargaImagen imagen = new cargaImagen();
     public BufferedImage img = null;
     public File imgSelec = null;
             
@@ -37,14 +37,14 @@ public class interfaz extends javax.swing.JFrame {
         mutate.setEnabled(false);
     }
 
-    class interfaceThread extends Thread{
+    /*class interfaceThread extends Thread{
         @Override
         public void run(){
             BufferedImage randomImg = null;
 //            while(optimo){
                 for(int i = 0; i < AAProyecto1.generation.length; i++){
                     try{
-                       String path = AAProyecto1.generation[i].getName();
+                       //String path = AAProyecto1.generation[i].getName();
                         System.out.println("entra: "+i);
                        File imgRand = new File(path);
                        randomImg = ImageIO.read(imgRand);
@@ -61,7 +61,7 @@ public class interfaz extends javax.swing.JFrame {
                 }
 //           }
         }
-    }
+    }*/
 
     public interfaz(JButton convertor, JButton imageSelect, JLabel lblMeta, JLabel lblSeleccionada, JButton mutate, JPanel panel1, JPanel panel2, JButton randomCreate) throws HeadlessException {
         this.convertor = convertor;
@@ -243,7 +243,7 @@ public class interfaz extends javax.swing.JFrame {
 
     private void randomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomCreateActionPerformed
         try{
-            AAProyecto1.generation = firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
+            firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
             AAProyecto1.startProgram();
         }catch (IOException ex) {
             System.out.println(ex);

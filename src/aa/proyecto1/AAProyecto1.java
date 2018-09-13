@@ -26,13 +26,13 @@ public class AAProyecto1 {
     public static image[] generation;
     public static ArrayList<image> optimos = new ArrayList();
     
-    public static image[] firstGeneration(int height,int width, int tamPob) throws IOException{
+    public static void firstGeneration(int height,int width, int tamPob) throws IOException{
         image[] images = new image[tamPob];
-        for(int i = 0; i < tamPob; i++){
+        for(int i = 1; i <= tamPob; i++){
             randomImage img = new randomImage(); 
-            images[i] = img.getImage(height, width, "1."+i);
+            images[i-1] = img.getImage(height, width, "1."+i);
         }
-        return images;
+        generation = images;
     }
     
     public static void getDifference(image goalImage, image[] generation)
@@ -51,9 +51,9 @@ public class AAProyecto1 {
         }
     }
     
-    public static void mutate(image img, image goalImage, String name)
+    public static image mutate(image img, image goalImage, String name)
     {
-        image pixels = new image(img.getWidth(), img.getHeight(),name);
+        image result = new image(img.getWidth(), img.getHeight(),name);
         BufferedImage newImg = new BufferedImage(img.getWidth(), img.getHeight(),  BufferedImage.TYPE_INT_ARGB);
         File f = null;
        
@@ -77,28 +77,87 @@ public class AAProyecto1 {
                         p = img.getPixel(x, y);
                     }
                 }
-                pixels.setPixel(x, y, p);
+                result.setPixel(x, y, p);
+                p = (255<<24) | (p<<16) | (p<<8) | p;
                 newImg.setRGB(y, x, p); 
             }
         }
-        
         //write image
         try{
           f = new File("images\\"+name+".png");
           ImageIO.write(newImg, "png", f);
         }catch(IOException e){
           System.out.println(e);
-        }        
+        }  
+        return result;
     }
     
+    public static image[] crossover(image parent1, image parent2, String name1, String name2)
+    {
+        image result1 = new image(parent1.getWidth(), parent1.getHeight(), name1);
+        image result2 = new image(parent1.getWidth(), parent1.getHeight(), name2);
+        BufferedImage newImg1 = new BufferedImage(parent1.getWidth(), parent1.getHeight(),  BufferedImage.TYPE_INT_ARGB);
+        BufferedImage newImg2 = new BufferedImage(parent1.getWidth(), parent1.getHeight(),  BufferedImage.TYPE_INT_ARGB);
+        File f = null;
+        
+        
+        image[] result = new image[2];
+       
+        for(int x = 0; x < parent1.getWidth(); x++)
+        {
+            int p;
+            for(int y = 0; y < parent1.getHeight()/2; y++)
+            {
+                p = parent1.getPixel(x, y);
+                result1.setPixel(x, y, p);
+                
+                p = (255<<24) | (p<<16) | (p<<8) | p;
+                newImg1.setRGB(x, y, p);
+                
+                
+                p = parent2.getPixel(x, y);
+                result2.setPixel(x, y, p);
+                p = (255<<24) | (p<<16) | (p<<8) | p;
+            }
+            for(int y = 0; y < parent1.getHeight()/2; y++)
+            {
+                p = parent2.getPixel(x, y);
+                result1.setPixel(x, y, p);
+                p = (255<<24) | (p<<16) | (p<<8) | p;
+                newImg1.setRGB(y, x, p);
+                
+                p = parent1.getPixel(x, y);
+                result2.setPixel(x, y, p);
+                p = (255<<24) | (p<<16) | (p<<8) | p;
+                newImg2.setRGB(x, y, p);
+            }
+        }
+        
+        //write image
+        try{
+          f = new File("images\\"+name1+".png");
+          ImageIO.write(newImg1, "png", f);
+          f = new File("images\\"+name2+".png");
+          ImageIO.write(newImg2, "png", f);
+        }catch(IOException e){
+          System.out.println(e);
+        }    
+        result[0] = result1;
+        result[1] = result2;
+        return (result);
+    }
+    
+   
     public static void startProgram()
     {
         Boolean stop = false;
-        
+
+        int generationCount = 2;
         while(!stop)
         {
+            System.out.println("Generation: " + generationCount);
             getDifference(goalImage, generation); 
-            
+           
             image bestGenes = generation[0];
 
             for(int i = 0; i < generation.length; i++)
@@ -111,10 +170,33 @@ public class AAProyecto1 {
             
             optimos.add(bestGenes);
             
+            int i = 1;
+            while(i<=generation.length)
+            {
+                boolean cruzar = Math.random()*100<=menuInicial.PROBABILIDAD_CRUCE;
+                if (i == generation.length || cruzar == false){
+                    generation[i-1] = mutate(generation[i-1], goalImage, Integer.toString(generationCount) + "." + Integer.toString(i));
+                    System.out.println(Integer.toString(generationCount) + "." + Integer.toString(i) +" Mutate");
+                    i++;
+                }
+                
+                else
+                {  
+                    int j = i+1;  
+                    image[] newImg = crossover(generation[i-1], generation[i], Integer.toString(generationCount) + "." + Integer.toString(i), Integer.toString(generationCount) + "." + Integer.toString(j));
+                    generation[i-1] = newImg[0];
+                    generation[i] = newImg[1];
+                    System.out.println(Integer.toString(generationCount) + "." + Integer.toString(i) + " Crossover");
+                    i=i+2;
+                }
+            }
             
+            if(generationCount == 10)
+            {
+                stop = true;
+            }
                         
-            
-            stop = true;
+            generationCount++;
 
         }
     }
@@ -123,26 +205,7 @@ public class AAProyecto1 {
         menuInicial Ventana = new menuInicial();
         Ventana.setVisible(true);
         
-        /*double[] difference = getDifference(goalImage, generation);
-        
-        for(int i = 0; i < difference.length; i++)
-        {
-            System.out.println(difference[i]);
-        }*/
-        
-        
-       /* double bestGenes = difference[0];
-
-        for(int i = 0; i < difference.length; i++)
-        {
-            System.out.println(difference[i] + "    " + bestGenes);
-            if(difference[i] < bestGenes)
-            {
-                bestGenes = difference[i];
-            }
-        }
-        
-        System.out.println("Best: " + bestGenes);*/   
+         
     }
     
 }

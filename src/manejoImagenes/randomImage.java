@@ -22,7 +22,7 @@ public class randomImage
     
     public image getImage(int width, int height, String name) throws IOException
     {
-       System.out.println(name);
+       //System.out.println(name);
        image pixels = new image(width,height,"images\\"+name+".png");
        BufferedImage img = new BufferedImage(width, height,  BufferedImage.TYPE_INT_ARGB);
        File f = null;
