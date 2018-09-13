@@ -113,21 +113,24 @@ public class AAProyecto1 {
                 
                 p = (255<<24) | (p<<16) | (p<<8) | p;
                 newImg1.setRGB(x, y, p);
-                
-                
+               
                 p = parent2.getPixel(x, y);
                 result2.setPixel(x, y, p);
+                
                 p = (255<<24) | (p<<16) | (p<<8) | p;
+                newImg2.setRGB(x, y, p);
             }
-            for(int y = 0; y < parent1.getHeight()/2; y++)
+            for(int y = parent1.getHeight()/2; y < parent1.getHeight(); y++)
             {
                 p = parent2.getPixel(x, y);
-                result1.setPixel(x, y, p);
+                result2.setPixel(x, y, p);
+                
                 p = (255<<24) | (p<<16) | (p<<8) | p;
-                newImg1.setRGB(y, x, p);
+                newImg1.setRGB(x, y, p);
                 
                 p = parent1.getPixel(x, y);
-                result2.setPixel(x, y, p);
+                result1.setPixel(x, y, p);
+                
                 p = (255<<24) | (p<<16) | (p<<8) | p;
                 newImg2.setRGB(x, y, p);
             }
@@ -191,7 +194,7 @@ public class AAProyecto1 {
                 }
             }
             
-            if(generationCount == 10)
+            if(generationCount == 1000)
             {
                 stop = true;
             }
