@@ -135,6 +135,7 @@ public class menuInicial extends javax.swing.JFrame {
             PROBABILIDAD_CRUCE = Integer.parseInt(probCruce.getText());
             PORCENTAJE_MUTACION = Integer.parseInt(genCruce.getText());
             PORCENTAJE_MENOS_APTOS = Integer.parseInt(menosAptos.getText());
+            
             interfaz Interfaz = new interfaz();
             Interfaz.setVisible(true);
             this.dispose();

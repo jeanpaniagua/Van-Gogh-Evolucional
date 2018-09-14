@@ -7,6 +7,7 @@ package interfaz;
 
 import aa.proyecto1.AAProyecto1;
 import static aa.proyecto1.AAProyecto1.firstGeneration;
+import static interfaz.menuInicial.TAMAÑO_POBLACION;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -37,6 +38,12 @@ public class interfaz extends javax.swing.JFrame {
         mutate.setEnabled(false);
     }
 
+    class interfaceThread extends Thread{
+        @Override
+        public void run(){
+            
+        }
+    }
     /*class interfaceThread extends Thread{
         @Override
         public void run(){
@@ -45,7 +52,7 @@ public class interfaz extends javax.swing.JFrame {
                 for(int i = 0; i < AAProyecto1.generation.length; i++){
                     try{
                        //String path = AAProyecto1.generation[i].getName();
-                        System.out.println("entra: "+i);
+                       System.out.println("entra: "+i);
                        File imgRand = new File(path);
                        randomImg = ImageIO.read(imgRand);
                        ImageIcon selectedImg = new ImageIcon(randomImg);
@@ -62,6 +69,20 @@ public class interfaz extends javax.swing.JFrame {
 //           }
         }
     }*/
+    
+    public void update()
+    {
+        try{
+           imgSelec = new File(AAProyecto1.optimos.get(AAProyecto1.optimos.size()-1).getName());
+           img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        ImageIcon selectedImg = new ImageIcon(img);
+        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblMeta.getWidth(), lblMeta.getHeight(), 
+                Image.SCALE_DEFAULT));
+        imageSelect.setIcon(selectedIcon);
+    }
 
     public interfaz(JButton convertor, JButton imageSelect, JLabel lblMeta, JLabel lblSeleccionada, JButton mutate, JPanel panel1, JPanel panel2, JButton randomCreate) throws HeadlessException {
         this.convertor = convertor;
@@ -244,6 +265,10 @@ public class interfaz extends javax.swing.JFrame {
     private void randomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomCreateActionPerformed
         try{
             firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
+            
+            menuInicial.PORCENTAJE_MUTACION = menuInicial.PORCENTAJE_MUTACION + 20 - menuInicial.PORCENTAJE_MENOS_APTOS;
+            
+            
             AAProyecto1.startProgram();
         }catch (IOException ex) {
             System.out.println(ex);
