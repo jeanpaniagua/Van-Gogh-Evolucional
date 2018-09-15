@@ -19,7 +19,7 @@ public class menuInicial extends javax.swing.JFrame {
     
     public static int TAMAÑO_POBLACION;
     public static int PROBABILIDAD_CRUCE;
-    public static int PORCENTAJE_MUTACION;
+    public static int PORCENTAJE_CRUCE;
     public static int PORCENTAJE_MENOS_APTOS;
     
     public menuInicial() {
@@ -130,10 +130,16 @@ public class menuInicial extends javax.swing.JFrame {
                 !isNumeric(menosAptos.getText())){
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Los valores deben ser únicamente números enteros.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if((int)Integer.parseInt(menosAptos.getText()) > 20){
+            JOptionPane.showMessageDialog(null, "El Porcentaje de Menos Aptos no puede ser mayor a 20.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if((int)Integer.parseInt(probCruce.getText()) > 90){
+            JOptionPane.showMessageDialog(null, "La Probabilidad de Cruce no puede ser mayor a 90.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if((int)Integer.parseInt(genCruce.getText()) > 100){
+            JOptionPane.showMessageDialog(null, "El Porcentage de Cruce no puede ser mayor a 100.", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             TAMAÑO_POBLACION = Integer.parseInt(tamPob.getText());
             PROBABILIDAD_CRUCE = Integer.parseInt(probCruce.getText());
-            PORCENTAJE_MUTACION = Integer.parseInt(genCruce.getText());
+            PORCENTAJE_CRUCE = Integer.parseInt(genCruce.getText());
             PORCENTAJE_MENOS_APTOS = Integer.parseInt(menosAptos.getText());
             
             interfaz Interfaz = new interfaz();

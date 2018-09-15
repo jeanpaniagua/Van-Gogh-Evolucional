@@ -7,7 +7,6 @@ package interfaz;
 
 import aa.proyecto1.AAProyecto1;
 import static aa.proyecto1.AAProyecto1.firstGeneration;
-import static interfaz.menuInicial.TAMAÑO_POBLACION;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -18,8 +17,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import manejoImagenes.rgbToGrayScale;
+import thread.euclideanDistance;
 
 /**
  *
@@ -33,42 +34,23 @@ public class interfaz extends javax.swing.JFrame {
             
     public interfaz() {
         initComponents();
-        convertor.setEnabled(false);
-        randomCreate.setEnabled(false);
-        mutate.setEnabled(false);
+        iniciarPrograma.setEnabled(false);
+        resultados.setEnabled(false);
+        tamPob.setText("" + menuInicial.TAMAÑO_POBLACION);
+        probCruce.setText("" + menuInicial.PROBABILIDAD_CRUCE);
+        porcCruce.setText("" + menuInicial.PORCENTAJE_CRUCE);
+        menosAptos.setText("" + menuInicial.PORCENTAJE_MENOS_APTOS);
     }
 
     class interfaceThread extends Thread{
         @Override
         public void run(){
-            
+            while(true){
+                numGen.setText("" + (euclideanDistance.NUMERO_GENERACION - 1));
+                numGen.repaint();
+            }
         }
     }
-    /*class interfaceThread extends Thread{
-        @Override
-        public void run(){
-            BufferedImage randomImg = null;
-//            while(optimo){
-                for(int i = 0; i < AAProyecto1.generation.length; i++){
-                    try{
-                       //String path = AAProyecto1.generation[i].getName();
-                       System.out.println("entra: "+i);
-                       File imgRand = new File(path);
-                       randomImg = ImageIO.read(imgRand);
-                       ImageIcon selectedImg = new ImageIcon(randomImg);
-                       Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
-                               lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
-                       lblSeleccionada.setIcon(selectedIcon);
-                       this.sleep(100);
-                    }catch (IOException e){
-                        System.out.println(e);
-                    }catch (InterruptedException ex){
-                        System.out.println(ex);
-                    }
-                }
-//           }
-        }
-    }*/
     
     public void update()
     {
@@ -79,20 +61,17 @@ public class interfaz extends javax.swing.JFrame {
             System.out.println(e);
         }
         ImageIcon selectedImg = new ImageIcon(img);
-        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblMeta.getWidth(), lblMeta.getHeight(), 
+        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), lblSeleccionada.getHeight(), 
                 Image.SCALE_DEFAULT));
         imageSelect.setIcon(selectedIcon);
     }
 
     public interfaz(JButton convertor, JButton imageSelect, JLabel lblMeta, JLabel lblSeleccionada, JButton mutate, JPanel panel1, JPanel panel2, JButton randomCreate) throws HeadlessException {
-        this.convertor = convertor;
         this.imageSelect = imageSelect;
-        this.lblMeta = lblMeta;
         this.lblSeleccionada = lblSeleccionada;
-        this.mutate = mutate;
+        this.resultados = mutate;
         this.panel1 = panel1;
-        this.panel2 = panel2;
-        this.randomCreate = randomCreate;
+        this.iniciarPrograma = randomCreate;
     }
     
     /**
@@ -104,39 +83,28 @@ public class interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel2 = new javax.swing.JPanel();
-        lblMeta = new javax.swing.JLabel();
         panel1 = new javax.swing.JPanel();
         lblSeleccionada = new javax.swing.JLabel();
         imageSelect = new javax.swing.JButton();
-        randomCreate = new javax.swing.JButton();
-        convertor = new javax.swing.JButton();
-        mutate = new javax.swing.JButton();
+        iniciarPrograma = new javax.swing.JButton();
+        resultados = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tamPob = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        probCruce = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        porcCruce = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        menosAptos = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        numGen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(111, 16));
+        setMinimumSize(new java.awt.Dimension(111, 16));
         setResizable(false);
-
-        panel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblMeta.setBorder(new javax.swing.border.MatteBorder(null));
-
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblMeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblMeta, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                .addContainerGap())
-        );
 
         panel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -166,65 +134,137 @@ public class interfaz extends javax.swing.JFrame {
             }
         });
 
-        randomCreate.setText("Iniciar Programa");
-        randomCreate.addActionListener(new java.awt.event.ActionListener() {
+        iniciarPrograma.setText("Iniciar Programa");
+        iniciarPrograma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                randomCreateActionPerformed(evt);
+                iniciarProgramaActionPerformed(evt);
             }
         });
 
-        convertor.setText("Convertir a Grises");
-        convertor.addActionListener(new java.awt.event.ActionListener() {
+        resultados.setText("Mostrar Resultados");
+        resultados.setMaximumSize(new java.awt.Dimension(125, 32));
+        resultados.setMinimumSize(new java.awt.Dimension(125, 32));
+        resultados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                convertorActionPerformed(evt);
+                resultadosActionPerformed(evt);
             }
         });
 
-        mutate.setText("Mostrar Resultados");
-        mutate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mutateActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Consolas", 1, 16)); // NOI18N
+        jLabel1.setText("Parámetros Ingresados:");
+
+        jLabel2.setText("Tamaño Población:");
+        jLabel2.setMaximumSize(new java.awt.Dimension(111, 16));
+        jLabel2.setMinimumSize(new java.awt.Dimension(111, 16));
+
+        tamPob.setMaximumSize(new java.awt.Dimension(111, 16));
+        tamPob.setMinimumSize(new java.awt.Dimension(111, 16));
+
+        jLabel3.setText("Probabilidad Cruce:");
+
+        probCruce.setMaximumSize(new java.awt.Dimension(111, 16));
+        probCruce.setMinimumSize(new java.awt.Dimension(111, 16));
+
+        jLabel5.setText("Porcentaje Cruce:");
+        jLabel5.setMaximumSize(new java.awt.Dimension(111, 16));
+        jLabel5.setMinimumSize(new java.awt.Dimension(111, 16));
+
+        porcCruce.setMaximumSize(new java.awt.Dimension(111, 16));
+        porcCruce.setMinimumSize(new java.awt.Dimension(111, 16));
+
+        jLabel7.setText("% Menos Aptos:");
+        jLabel7.setMaximumSize(new java.awt.Dimension(111, 16));
+        jLabel7.setMinimumSize(new java.awt.Dimension(111, 16));
+
+        menosAptos.setMaximumSize(new java.awt.Dimension(111, 16));
+        menosAptos.setMinimumSize(new java.awt.Dimension(111, 16));
+
+        jLabel9.setFont(new java.awt.Font("Consolas", 1, 16)); // NOI18N
+        jLabel9.setText("Número de Generaciones:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(imageSelect, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(randomCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(convertor, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                    .addComponent(mutate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(117, 117, 117)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(probCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(porcCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(menosAptos, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(tamPob, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(6, 6, 6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(numGen, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(iniciarPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resultados, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(convertor)
-                    .addComponent(imageSelect))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tamPob, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(probCruce, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(porcCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(menosAptos, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(5, 5, 5)))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(imageSelect)
+                    .addComponent(numGen, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mutate)
-                    .addComponent(randomCreate))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(iniciarPrograma)
+                    .addComponent(resultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -232,53 +272,43 @@ public class interfaz extends javax.swing.JFrame {
 
     private void imageSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imageSelectActionPerformed
         imgSelec = imagen.buscador();
-        try {
-            img = ImageIO.read(imgSelec);
-        } catch (IOException e){
-            System.out.println(e);
+        rgbToGrayScale toGray = new rgbToGrayScale();
+        if(imgSelec == null){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una imagen.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try{
+               AAProyecto1.goalImage = toGray.getGrayImg(imgSelec);
+               imgSelec = new File("images\\finalImage.png");
+               img = ImageIO.read(imgSelec);
+            }catch (IOException e){
+                System.out.println(e);
+            }
+            ImageIcon selectedImg = new ImageIcon(img);
+            Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
+                    lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
+            lblSeleccionada.setIcon(selectedIcon);
+            iniciarPrograma.setEnabled(true);
         }
-        ImageIcon selectedImg = new ImageIcon(img);
-        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblSeleccionada.getWidth(), 
-                lblSeleccionada.getHeight(), Image.SCALE_DEFAULT));
-        lblSeleccionada.setIcon(selectedIcon);
-        convertor.setEnabled(true);
     }//GEN-LAST:event_imageSelectActionPerformed
 
-    private void convertorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertorActionPerformed
-        rgbToGrayScale toGray = new rgbToGrayScale();
-        try{
-           AAProyecto1.goalImage = toGray.getGrayImg(imgSelec);
-           imgSelec = new File("images\\finalImage.png");
-           img = ImageIO.read(imgSelec);
-        }catch (IOException e){
-            System.out.println(e);
-        }
-        ImageIcon selectedImg = new ImageIcon(img);
-        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(lblMeta.getWidth(), lblMeta.getHeight(), 
-                Image.SCALE_DEFAULT));
-        lblMeta.setIcon(selectedIcon);
+    private void iniciarProgramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarProgramaActionPerformed
+        interfaceThread GEN = new interfaceThread();
+        GEN.start();
         imageSelect.setEnabled(false);
-        convertor.setEnabled(false);
-        randomCreate.setEnabled(true);
-    }//GEN-LAST:event_convertorActionPerformed
-
-    private void randomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randomCreateActionPerformed
+        iniciarPrograma.setEnabled(false);
         try{
             firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
-            
-            menuInicial.PORCENTAJE_MUTACION = menuInicial.PORCENTAJE_MUTACION + 20 - menuInicial.PORCENTAJE_MENOS_APTOS;
-            
-            
+            menuInicial.PORCENTAJE_CRUCE = menuInicial.PORCENTAJE_CRUCE + 20 - menuInicial.PORCENTAJE_MENOS_APTOS;
             AAProyecto1.startProgram();
         }catch (IOException ex) {
             System.out.println(ex);
         }
-        mutate.setEnabled(true);
-    }//GEN-LAST:event_randomCreateActionPerformed
+        resultados.setEnabled(true);
+    }//GEN-LAST:event_iniciarProgramaActionPerformed
 
-    private void mutateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutateActionPerformed
+    private void resultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadosActionPerformed
         //randomCreate.setEnabled(false);
-    }//GEN-LAST:event_mutateActionPerformed
+    }//GEN-LAST:event_resultadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,13 +346,21 @@ public class interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton convertor;
     private javax.swing.JButton imageSelect;
-    private javax.swing.JLabel lblMeta;
+    private javax.swing.JButton iniciarPrograma;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblSeleccionada;
-    private javax.swing.JButton mutate;
+    private javax.swing.JLabel menosAptos;
+    private javax.swing.JLabel numGen;
     private javax.swing.JPanel panel1;
-    private javax.swing.JPanel panel2;
-    private javax.swing.JButton randomCreate;
+    private javax.swing.JLabel porcCruce;
+    private javax.swing.JLabel probCruce;
+    private javax.swing.JButton resultados;
+    private javax.swing.JLabel tamPob;
     // End of variables declaration//GEN-END:variables
 }

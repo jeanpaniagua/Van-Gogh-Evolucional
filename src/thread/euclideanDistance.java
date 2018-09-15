@@ -20,6 +20,9 @@ import javax.imageio.ImageIO;
  */
 public class euclideanDistance extends Thread{
     
+    private static boolean OPTIMO = false;
+    public static int NUMERO_GENERACION = 0;
+    
     public static int getDifference(image goalImage, image img)
     {
         int result = 0;
@@ -36,7 +39,7 @@ public class euclideanDistance extends Thread{
     public static image mutate(image img, image goalImage, String name)
     {
         int difference = 0;
-        
+        int similar = 0;
         image result = new image(img.getWidth(), img.getHeight(),name);
         BufferedImage newImg = new BufferedImage(img.getWidth(), img.getHeight(),  BufferedImage.TYPE_INT_ARGB);
         File f = null;
@@ -47,13 +50,18 @@ public class euclideanDistance extends Thread{
             {
                 int p = 0;
                 int pixelDifference = (int)Math.sqrt(Math.pow((goalImage.getPixel(x, y) - img.getPixel(x, y)), 2));
-                if(pixelDifference == 0)
+                if(pixelDifference <= 10)
                 {
                     p = img.getPixel(x, y);
+                    similar++;
+                    if(similar == img.getHeight()* img.getWidth()){
+                        OPTIMO = true;
+                        System.out.println("FIN. Terminó con " + name);
+                    }
                 }
                 else
                 {
-                    if(Math.random()*100<=menuInicial.PORCENTAJE_MUTACION)
+                    if(Math.random()*100<=menuInicial.PORCENTAJE_CRUCE)
                     {             
                         p = (int)(Math.random()*256);  
                     }
@@ -170,17 +178,15 @@ public class euclideanDistance extends Thread{
     
     @Override
     public void run() {
-        Boolean stop = false;
         for(int i = 0; i < generation.length; i++)
         {
             generation[i].setDifference(getDifference(goalImage, generation[i]));
         }
         
-        int generationCount = 2;
-        while(!stop)
+        NUMERO_GENERACION = 2;
+        while(!OPTIMO)
         {
-            System.out.println("Generation: " + generationCount);
-            
+            System.out.println("Generation: " + NUMERO_GENERACION);
             quickSort(generation, 0, generation.length - 1);         
             
             int i = 1;
@@ -188,30 +194,29 @@ public class euclideanDistance extends Thread{
             {
                 boolean cruzar = Math.random()*100<=menuInicial.PROBABILIDAD_CRUCE;
                 if (i == generation.length || cruzar == false){
-                    generation[i-1] = mutate(generation[i-1], goalImage, Integer.toString(generationCount) + "." + Integer.toString(i));
-                    System.out.println(Integer.toString(generationCount) + "." + Integer.toString(i) +" Mutate");
+                    generation[i-1] = mutate(generation[i-1], goalImage, Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i));
+                    System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i) +" Mutate");
                     i++;
                 }
-                
                 else
                 {  
                     int j = i+1;  
-                    image[] newImg = crossover(generation[i-1], generation[i], Integer.toString(generationCount) + "." + Integer.toString(i), Integer.toString(generationCount) + "." + Integer.toString(j));
+                    image[] newImg = crossover(generation[i-1], generation[i], Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i), Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(j));
                     newImg[0].setDifference(getDifference(goalImage, newImg[0]));
                     newImg[1].setDifference(getDifference(goalImage, newImg[1]));
                     generation[i-1] = newImg[0];
                     generation[i] = newImg[1];
-                    System.out.println(Integer.toString(generationCount) + "." + Integer.toString(i) + " Crossover");
+                    System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i) + " Crossover");
                     i=i+2;
                 }
             }
             
-            if(generationCount == 50000)
+            if(NUMERO_GENERACION == 5000)
             {
-                stop = true;
+                OPTIMO = true;
             }
                         
-            generationCount++;
+            NUMERO_GENERACION++;
 
         }
     }    
