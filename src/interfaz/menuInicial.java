@@ -70,7 +70,7 @@ public class menuInicial extends javax.swing.JFrame {
 
         jLabel2.setText("Probabilidad de Cruce:");
 
-        jLabel3.setText("Porcentaje Genes a Cruzar:");
+        jLabel3.setText("Porcentaje Genes a Mutar:");
 
         jLabel4.setText("Porcentaje Individuos Menos Aptos:");
 
