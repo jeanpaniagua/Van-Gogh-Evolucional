@@ -55,7 +55,7 @@ public class euclideanDistance extends Thread{
                     p = img.getPixel(x, y);
                     similar++;
                     
-                    if(similar == (int)(img.getHeight()* img.getWidth()*0.95)){
+                    if(similar >= (int)(img.getHeight()* img.getWidth()*0.95)){
                         OPTIMO = true;
                         System.out.println("FIN. Terminó con " + name);
                     }
