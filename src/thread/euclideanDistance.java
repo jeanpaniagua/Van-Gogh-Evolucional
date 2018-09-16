@@ -50,11 +50,12 @@ public class euclideanDistance extends Thread{
             {
                 int p = 0;
                 int pixelDifference = (int)Math.sqrt(Math.pow((goalImage.getPixel(x, y) - img.getPixel(x, y)), 2));
-                if(pixelDifference <= 10)
+                if(pixelDifference <= 05)
                 {
                     p = img.getPixel(x, y);
                     similar++;
-                    if(similar == img.getHeight()* img.getWidth()){
+                    
+                    if(similar == (int)(img.getHeight()* img.getWidth()*0.95)){
                         OPTIMO = true;
                         System.out.println("FIN. Terminó con " + name);
                     }
