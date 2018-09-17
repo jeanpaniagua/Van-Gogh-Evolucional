@@ -37,7 +37,12 @@ public class AAProyecto1 {
    
     public static void startProgram()
     {
-        euclideanDistance start = new euclideanDistance();
+       //euclideanDistance start = new euclideanDistance();
+       
+        
+       divideAndConquer start = new divideAndConquer();
+        
+        
         start.run();
     }
     

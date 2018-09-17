@@ -50,21 +50,28 @@ public class euclideanDistance extends Thread{
             {
                 int p = 0;
                 int pixelDifference = (int)Math.sqrt(Math.pow((goalImage.getPixel(x, y) - img.getPixel(x, y)), 2));
-                if(pixelDifference <= 05)
+                if(pixelDifference <= 10)
                 {
                     p = img.getPixel(x, y);
                     similar++;
                     
                     if(similar >= (int)(img.getHeight()* img.getWidth()*0.95)){
                         OPTIMO = true;
-                        System.out.println("FIN. Terminó con " + name);
                     }
                 }
                 else
                 {
                     if(Math.random()*100<=menuInicial.PORCENTAJE_CRUCE)
                     {             
-                        p = (int)(Math.random()*256);  
+                        //p = (int)(Math.random()*256);  
+                        if(goalImage.getPixel(x, y)<img.getPixel(x, y))
+                        {
+                            p = (int)(Math.random()*img.getPixel(x, y));
+                        }
+                        else
+                        {
+                            p = (int)(Math.random()*pixelDifference + img.getPixel(x, y));
+                        }
                     }
                     else
                     {
@@ -208,6 +215,8 @@ public class euclideanDistance extends Thread{
                     generation[i-1] = newImg[0];
                     generation[i] = newImg[1];
                     System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i) + " Crossover");
+                    System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i+1) + " Crossover");
+
                     i=i+2;
                 }
             }
@@ -220,6 +229,7 @@ public class euclideanDistance extends Thread{
             NUMERO_GENERACION++;
 
         }
+        System.out.println("FIN. Terminó con " + NUMERO_GENERACION + " generacciones.");
     }    
  
 }
