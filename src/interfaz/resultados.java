@@ -5,6 +5,15 @@
  */
 package interfaz;
 
+import aa.proyecto1.AAProyecto1;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Jean Carlo
@@ -16,6 +25,7 @@ public class resultados extends javax.swing.JFrame {
      */
     public resultados() {
         initComponents();
+        showResult();
     }
 
     /**
@@ -379,8 +389,121 @@ public class resultados extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-    public static void showResult(){
-        
+    public void showResult(){
+        int intToShow = (int)AAProyecto1.NUMERO_GENERACION/10;
+        System.out.println(intToShow);
+        File imgSelec = null;
+        BufferedImage img = null;
+        int i = 1;
+        try{
+            imgSelec = new File("images\\1.png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        ImageIcon selectedImg = new ImageIcon(img);
+        Icon selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result1.getWidth(), 
+                    result1.getHeight(), Image.SCALE_DEFAULT));
+        result1.setIcon(selectedIcon);
+        i+=intToShow;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result2.getWidth(), 
+                    result2.getHeight(), Image.SCALE_DEFAULT));
+        result2.setIcon(selectedIcon);
+        i+=intToShow;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result3.getWidth(), 
+                    result3.getHeight(), Image.SCALE_DEFAULT));
+        result2.setIcon(selectedIcon);
+        i+=intToShow;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result4.getWidth(), 
+                    result4.getHeight(), Image.SCALE_DEFAULT));
+        result3.setIcon(selectedIcon);
+        i+=intToShow;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result5.getWidth(), 
+                    result5.getHeight(), Image.SCALE_DEFAULT));
+        result4.setIcon(selectedIcon);
+        i+=intToShow;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result6.getWidth(), 
+                    result6.getHeight(), Image.SCALE_DEFAULT));
+        result5.setIcon(selectedIcon);
+        i+=intToShow;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result7.getWidth(), 
+                    result7.getHeight(), Image.SCALE_DEFAULT));
+        result7.setIcon(selectedIcon);
+        i+=intToShow;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result8.getWidth(), 
+                    result8.getHeight(), Image.SCALE_DEFAULT));
+        result8.setIcon(selectedIcon);
+        i+=intToShow;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result9.getWidth(), 
+                    result9.getHeight(), Image.SCALE_DEFAULT));
+        result9.setIcon(selectedIcon);
+        i=AAProyecto1.generation.length;
+        try{
+            imgSelec = new File("images\\"+i+".png");
+            img = ImageIO.read(imgSelec);
+        }catch (IOException e){
+            System.out.println(e);
+        }
+        selectedImg = new ImageIcon(img);
+        selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result10.getWidth(), 
+                    result10.getHeight(), Image.SCALE_DEFAULT));
+        result10.setIcon(selectedIcon);
     }
     
     
@@ -411,11 +534,9 @@ public class resultados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
                 new resultados().setVisible(true);
             }
         });
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

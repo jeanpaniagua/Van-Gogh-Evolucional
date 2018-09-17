@@ -326,8 +326,10 @@ public class interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_iniciarProgramaActionPerformed
 
     private void resultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadosActionPerformed
-        //randomCreate.setEnabled(false);
-        AAProyecto1.showResult();
+        resultados ventanaResultados = new resultados();
+        ventanaResultados.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_resultadosActionPerformed
 
     /**

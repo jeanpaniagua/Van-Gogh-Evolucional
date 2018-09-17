@@ -74,12 +74,6 @@ public class AAProyecto1 {
             JOptionPane.showMessageDialog(null, "Error","Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public static void showResult()
-    {
-        int imagesToShow = (int)NUMERO_GENERACION/10;
-        System.out.println(imagesToShow);
-        
-    }
     
     public static void main(String[] args) throws IOException{
         menuInicial Ventana = new menuInicial();

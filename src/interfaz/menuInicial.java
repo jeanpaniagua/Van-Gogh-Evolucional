@@ -45,6 +45,7 @@ public class menuInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        divideAndConquer1 = new algorithms.divideAndConquer();
         iniciar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         tamPob = new javax.swing.JTextField();
@@ -207,6 +208,7 @@ public class menuInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> algoritmoSelect;
+    private algorithms.divideAndConquer divideAndConquer1;
     private javax.swing.JTextField genCruce;
     private javax.swing.JButton iniciar;
     private javax.swing.JLabel jLabel1;
