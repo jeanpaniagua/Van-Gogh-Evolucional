@@ -6,12 +6,13 @@
 
 package aa.proyecto1;
 
+import algorithms.divideAndConquer;
+import algorithms.euclideanDistance;
 import java.io.IOException;
 import manejoImagenes.*;
 import interfaz.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import thread.*;
 /**
  *
  * @author Jean Carlo
