@@ -6,6 +6,7 @@
 package interfaz;
 
 import javax.swing.JOptionPane;
+import static aa.proyecto1.AAProyecto1.SELECTED_ALGORITHM;
 
 /**
  *
@@ -54,6 +55,8 @@ public class menuInicial extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         menosAptos = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        algoritmoSelect = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -77,14 +80,18 @@ public class menuInicial extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         jLabel5.setText("Setear Parámetros");
 
+        jLabel6.setText("Algoritmo Genético:");
+
+        algoritmoSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Distancia Euclideana", "OTROALGORITMO", "Divide & Conquer" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
                     .addComponent(menosAptos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(genCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -93,8 +100,10 @@ public class menuInicial extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tamPob, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel5))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addComponent(algoritmoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,8 +127,12 @@ public class menuInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menosAptos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(10, 10, 10)
+                .addComponent(algoritmoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
 
         pack();
@@ -141,7 +154,7 @@ public class menuInicial extends javax.swing.JFrame {
             PROBABILIDAD_CRUCE = Integer.parseInt(probCruce.getText());
             PORCENTAJE_CRUCE = Integer.parseInt(genCruce.getText());
             PORCENTAJE_MENOS_APTOS = Integer.parseInt(menosAptos.getText());
-            
+            SELECTED_ALGORITHM = algoritmoSelect.getSelectedItem().toString();
             interfaz Interfaz = new interfaz();
             Interfaz.setVisible(true);
             this.dispose();
@@ -184,6 +197,7 @@ public class menuInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> algoritmoSelect;
     private javax.swing.JTextField genCruce;
     private javax.swing.JButton iniciar;
     private javax.swing.JLabel jLabel1;
@@ -191,6 +205,7 @@ public class menuInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField menosAptos;
     private javax.swing.JTextField probCruce;
     private javax.swing.JTextField tamPob;

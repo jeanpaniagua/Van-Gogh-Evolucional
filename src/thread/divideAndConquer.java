@@ -12,6 +12,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static aa.proyecto1.AAProyecto1.generation;
 import static aa.proyecto1.AAProyecto1.goalImage;
+import static aa.proyecto1.AAProyecto1.NUMERO_GENERACION;
 import interfaz.menuInicial;
 import manejoImagenes.image;
 
@@ -22,7 +23,10 @@ import manejoImagenes.image;
 public class divideAndConquer {
     
     private static boolean OPTIMO = false;
-    public static int NUMERO_GENERACION = 0;
+    
+    public static void segment(image img){
+        
+    }
     
     public static int getDifference(image goalImage, image img)
     {
@@ -209,13 +213,13 @@ public class divideAndConquer {
             NUMERO_GENERACION++;
             
             quickSort(generation, 0, generation.length-1);
-            System.out.println(generation[0].getDifference());
+            //System.out.println(generation[0].getDifference());
             
             
             getPNG(generation[0]);
  
 
         }
-        System.out.println("FIN. Terminó con " + NUMERO_GENERACION + " generacciones.");
+        System.out.println("FIN. Terminó con " + (NUMERO_GENERACION - 1) + " generacciones.");
     }
 }

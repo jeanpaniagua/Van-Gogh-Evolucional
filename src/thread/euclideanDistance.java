@@ -7,6 +7,7 @@ package thread;
 
 import static aa.proyecto1.AAProyecto1.generation;
 import static aa.proyecto1.AAProyecto1.goalImage;
+import static aa.proyecto1.AAProyecto1.NUMERO_GENERACION;
 import interfaz.menuInicial;
 import manejoImagenes.image;
 import java.awt.image.BufferedImage;
@@ -21,7 +22,6 @@ import javax.imageio.ImageIO;
 public class euclideanDistance extends Thread{
     
     private static boolean OPTIMO = false;
-    public static int NUMERO_GENERACION = 0;
     
     public static int getDifference(image goalImage, image img)
     {
@@ -203,7 +203,7 @@ public class euclideanDistance extends Thread{
                 boolean cruzar = Math.random()*100<=menuInicial.PROBABILIDAD_CRUCE;
                 if (i == generation.length || cruzar == false){
                     generation[i-1] = mutate(generation[i-1], goalImage, Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i));
-                    System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i) +" Mutate");
+                    //System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i) +" Mutate");
                     i++;
                 }
                 else
@@ -214,8 +214,8 @@ public class euclideanDistance extends Thread{
                     newImg[1].setDifference(getDifference(goalImage, newImg[1]));
                     generation[i-1] = newImg[0];
                     generation[i] = newImg[1];
-                    System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i) + " Crossover");
-                    System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i+1) + " Crossover");
+                    //System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i) + " Crossover");
+                    //System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i+1) + " Crossover");
 
                     i=i+2;
                 }
