@@ -57,7 +57,7 @@ public class euclideanAverage {
                 }
                 else
                 {
-                    if(Math.random()*100<=menuInicial.PORCENTAJE_CRUCE)
+                    if(Math.random()*100<=menuInicial.PORCENTAJE_MUTAR)
                     {             
                         p = (int)(Math.random()*256);  
                     }

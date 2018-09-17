@@ -38,7 +38,7 @@ public class interfaz extends javax.swing.JFrame {
         resultados.setEnabled(false);
         tamPob.setText("" + menuInicial.TAMAÑO_POBLACION);
         probCruce.setText("" + menuInicial.PROBABILIDAD_CRUCE);
-        porcCruce.setText("" + menuInicial.PORCENTAJE_CRUCE);
+        porcCruce.setText("" + menuInicial.PORCENTAJE_MUTAR);
         menosAptos.setText("" + menuInicial.PORCENTAJE_MENOS_APTOS);
         selectedAlgo.setText("" + AAProyecto1.SELECTED_ALGORITHM);
     }
@@ -314,7 +314,7 @@ public class interfaz extends javax.swing.JFrame {
         iniciarPrograma.setEnabled(false);
         try{
             firstGeneration(img.getHeight(), img.getWidth(), menuInicial.TAMAÑO_POBLACION);
-            menuInicial.PORCENTAJE_CRUCE = menuInicial.PORCENTAJE_CRUCE + 20 - menuInicial.PORCENTAJE_MENOS_APTOS;
+            menuInicial.PORCENTAJE_MUTAR = menuInicial.PORCENTAJE_MUTAR + 20 - menuInicial.PORCENTAJE_MENOS_APTOS;
             AAProyecto1.startProgram();
         }catch (IOException ex) {
             System.out.println(ex);

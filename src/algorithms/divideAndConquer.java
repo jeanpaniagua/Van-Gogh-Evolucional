@@ -64,7 +64,7 @@ public class divideAndConquer {
                 }
                 else
                 {
-                    if(Math.random()*100<=menuInicial.PORCENTAJE_CRUCE)
+                    if(Math.random()*100<=menuInicial.PORCENTAJE_MUTAR)
                     {             
                         //p = (int)(Math.random()*256);  
                         if(goalImage.getPixel(x, y)<img.getPixel(x, y))

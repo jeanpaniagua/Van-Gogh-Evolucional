@@ -20,7 +20,7 @@ public class menuInicial extends javax.swing.JFrame {
     
     public static int TAMAÑO_POBLACION;
     public static int PROBABILIDAD_CRUCE;
-    public static int PORCENTAJE_CRUCE;
+    public static int PORCENTAJE_MUTAR;
     public static int PORCENTAJE_MENOS_APTOS;
     
     public menuInicial() {
@@ -158,7 +158,7 @@ public class menuInicial extends javax.swing.JFrame {
         }else{
             TAMAÑO_POBLACION = Integer.parseInt(tamPob.getText());
             PROBABILIDAD_CRUCE = Integer.parseInt(probCruce.getText());
-            PORCENTAJE_CRUCE = Integer.parseInt(genCruce.getText());
+            PORCENTAJE_MUTAR = Integer.parseInt(genCruce.getText());
             PORCENTAJE_MENOS_APTOS = Integer.parseInt(menosAptos.getText());
             SELECTED_ALGORITHM = algoritmoSelect.getSelectedItem().toString();
             interfaz Interfaz = new interfaz();
