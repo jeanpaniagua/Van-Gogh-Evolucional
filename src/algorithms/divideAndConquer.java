@@ -13,7 +13,9 @@ import javax.imageio.ImageIO;
 import static aa.proyecto1.AAProyecto1.generation;
 import static aa.proyecto1.AAProyecto1.goalImage;
 import static aa.proyecto1.AAProyecto1.NUMERO_GENERACION;
+import static aa.proyecto1.AAProyecto1.beginTime;
 import interfaz.menuInicial;
+import java.util.Date;
 import manejoImagenes.image;
 
 /**
@@ -220,6 +222,10 @@ public class divideAndConquer {
  
 
         }
+        Date date = new Date();
+        AAProyecto1.endTime = date.getTime();
+        long time = AAProyecto1.beginTime - AAProyecto1.endTime;
+        System.out.println(time);
         System.out.println("FIN. Terminó con " + (NUMERO_GENERACION - 1) + " generacciones.");
     }
 }

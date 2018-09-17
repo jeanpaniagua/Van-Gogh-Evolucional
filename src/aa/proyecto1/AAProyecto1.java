@@ -15,6 +15,9 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  *
  * @author Jean Carlo
@@ -28,6 +31,9 @@ public class AAProyecto1 {
     public static ArrayList<image> optimos = new ArrayList();
     public static int NUMERO_GENERACION = 0;
     public static String SELECTED_ALGORITHM = "";
+    public static long beginTime;
+    public static long endTime;
+    
     
     public static void firstGeneration(int height,int width, int tamPob) throws IOException{
         image[] images = new image[tamPob];
@@ -61,6 +67,12 @@ public class AAProyecto1 {
         }
     }
     public static void startProgram(){
+        Date date = new Date();
+        beginTime = date.getTime();
+        //Caso 1: obtener la hora y salida por pantalla con formato:
+        DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+        System.out.println("Hora inicio: "+hourFormat.format(date));
+        
         if(SELECTED_ALGORITHM.equals("Euclidean Distance")){
             euclideanDistance start = new euclideanDistance();
             start.run();

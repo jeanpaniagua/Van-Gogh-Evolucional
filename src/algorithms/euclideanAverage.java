@@ -5,11 +5,13 @@
  */
 package algorithms;
 
+import aa.proyecto1.AAProyecto1;
 import static aa.proyecto1.AAProyecto1.*;
 import static aa.proyecto1.AAProyecto1.goalImage;
 import static aa.proyecto1.AAProyecto1.NUMERO_GENERACION;
 import static aa.proyecto1.AAProyecto1.generation;
 import interfaz.menuInicial;
+import java.util.Date;
 import manejoImagenes.image;
 
 /**
@@ -187,6 +189,10 @@ public class euclideanAverage {
             getPNG(generation[0]);
 
         }
+        Date date = new Date();
+        AAProyecto1.endTime = date.getTime();
+        long time = AAProyecto1.beginTime - AAProyecto1.endTime;
+        System.out.println(time);
         System.out.println("FIN. Terminó con " + NUMERO_GENERACION + " generacciones.");
     }    
  
