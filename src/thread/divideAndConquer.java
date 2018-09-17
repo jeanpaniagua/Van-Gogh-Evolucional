@@ -6,8 +6,6 @@
 package thread;
 
 import aa.proyecto1.AAProyecto1;
-import manejoImagenes.*;
-import interfaz.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
