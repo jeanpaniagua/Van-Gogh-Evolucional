@@ -167,9 +167,7 @@ public class interfaz extends javax.swing.JFrame {
         probCruce.setMaximumSize(new java.awt.Dimension(111, 16));
         probCruce.setMinimumSize(new java.awt.Dimension(111, 16));
 
-        jLabel5.setText("Porcentaje Cruce:");
-        jLabel5.setMaximumSize(new java.awt.Dimension(111, 16));
-        jLabel5.setMinimumSize(new java.awt.Dimension(111, 16));
+        jLabel5.setText("Porcentaje a Mutar:");
 
         porcCruce.setMaximumSize(new java.awt.Dimension(111, 16));
         porcCruce.setMinimumSize(new java.awt.Dimension(111, 16));
@@ -261,7 +259,7 @@ public class interfaz extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(porcCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,8 +326,6 @@ public class interfaz extends javax.swing.JFrame {
     private void resultadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultadosActionPerformed
         resultados ventanaResultados = new resultados();
         ventanaResultados.setVisible(true);
-        this.dispose();
-        
     }//GEN-LAST:event_resultadosActionPerformed
 
     /**

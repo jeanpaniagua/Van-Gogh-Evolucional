@@ -391,7 +391,6 @@ public class resultados extends javax.swing.JFrame {
     
     public void showResult(){
         int intToShow = (int)AAProyecto1.NUMERO_GENERACION/10;
-        System.out.println(intToShow);
         File imgSelec = null;
         BufferedImage img = null;
         int i = 1;
@@ -426,7 +425,7 @@ public class resultados extends javax.swing.JFrame {
         selectedImg = new ImageIcon(img);
         selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result3.getWidth(), 
                     result3.getHeight(), Image.SCALE_DEFAULT));
-        result2.setIcon(selectedIcon);
+        result3.setIcon(selectedIcon);
         i+=intToShow;
         try{
             imgSelec = new File("images\\"+i+".png");
@@ -437,7 +436,7 @@ public class resultados extends javax.swing.JFrame {
         selectedImg = new ImageIcon(img);
         selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result4.getWidth(), 
                     result4.getHeight(), Image.SCALE_DEFAULT));
-        result3.setIcon(selectedIcon);
+        result4.setIcon(selectedIcon);
         i+=intToShow;
         try{
             imgSelec = new File("images\\"+i+".png");
@@ -448,7 +447,7 @@ public class resultados extends javax.swing.JFrame {
         selectedImg = new ImageIcon(img);
         selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result5.getWidth(), 
                     result5.getHeight(), Image.SCALE_DEFAULT));
-        result4.setIcon(selectedIcon);
+        result5.setIcon(selectedIcon);
         i+=intToShow;
         try{
             imgSelec = new File("images\\"+i+".png");
@@ -459,7 +458,7 @@ public class resultados extends javax.swing.JFrame {
         selectedImg = new ImageIcon(img);
         selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result6.getWidth(), 
                     result6.getHeight(), Image.SCALE_DEFAULT));
-        result5.setIcon(selectedIcon);
+        result6.setIcon(selectedIcon);
         i+=intToShow;
         try{
             imgSelec = new File("images\\"+i+".png");
@@ -493,7 +492,7 @@ public class resultados extends javax.swing.JFrame {
         selectedIcon = new ImageIcon(selectedImg.getImage().getScaledInstance(result9.getWidth(), 
                     result9.getHeight(), Image.SCALE_DEFAULT));
         result9.setIcon(selectedIcon);
-        i=AAProyecto1.generation.length;
+        i=AAProyecto1.NUMERO_GENERACION-1;
         try{
             imgSelec = new File("images\\"+i+".png");
             img = ImageIO.read(imgSelec);
