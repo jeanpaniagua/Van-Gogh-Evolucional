@@ -16,9 +16,10 @@ import manejoImagenes.image;
  *
  * @author curso
  */
-public class euclideanDistance {
+public class euclideanAverage {
     
     private static boolean OPTIMO = false;
+    private static int size = goalImage.getHeight()*goalImage.getWidth();
     
     public static int getDifference(image goalImage, image img)
     {
@@ -30,7 +31,7 @@ public class euclideanDistance {
                 result = result + (int)Math.sqrt(Math.pow((goalImage.getPixel(x, y) - img.getPixel(x, y)), 2));
             }
         }
-        return result;
+        return result/size;
     }
     
     public static image mutate(image img, image goalImage, String name)
@@ -58,7 +59,7 @@ public class euclideanDistance {
                 {
                     if(Math.random()*100<=menuInicial.PORCENTAJE_CRUCE)
                     {             
-                        p = (int)(Math.random()*256); 
+                        p = (int)(Math.random()*256);  
                     }
                     else
                     {
@@ -66,19 +67,22 @@ public class euclideanDistance {
                     }
                     difference = difference + (int)Math.sqrt(Math.pow((goalImage.getPixel(x, y) - p), 2));
                 }
-                result.setPixel(x, y, p); 
+                result.setPixel(x, y, p);
+                p = (255<<24) | (p<<16) | (p<<8) | p;
             }
         }
-        result.setDifference(difference);
+        //write image 
+        result.setDifference((int)difference/size);
         return result;
     }
     
     public static image[] crossover(image parent1, image parent2, String name1, String name2)
     {        
         image result1 = new image(parent1.getWidth(), parent1.getHeight(), name1);
-        image result2 = new image(parent1.getWidth(), parent1.getHeight(), name2);        
-        
+        image result2 = new image(parent1.getWidth(), parent1.getHeight(), name2);
+       
         image[] result = new image[2];
+        
         
         for(int x = 0; x < parent1.getWidth(); x++)
         {
@@ -87,7 +91,7 @@ public class euclideanDistance {
             {
                 p = parent1.getPixel(x, y);
                 result1.setPixel(x, y, p);
-               
+                
                 p = parent2.getPixel(x, y);
                 result2.setPixel(x, y, p);
             }
@@ -99,7 +103,7 @@ public class euclideanDistance {
                 p = parent1.getPixel(x, y);
                 result1.setPixel(x, y, p);
             }
-        }   
+        }  
         result[0] = result1;
         result[1] = result2;
         return (result);
@@ -131,7 +135,8 @@ public class euclideanDistance {
         if (j + 1 < right) {
             quickSort(vector, j + 1, right);
         }
-    }   
+    }
+    
     
     
     public void run() {
@@ -176,7 +181,6 @@ public class euclideanDistance {
             }
                         
             NUMERO_GENERACION++;
-            
             
             quickSort(generation, 0, generation.length-1);            
             

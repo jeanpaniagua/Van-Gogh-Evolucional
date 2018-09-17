@@ -6,12 +6,14 @@
 
 package aa.proyecto1;
 
-import algorithms.divideAndConquer;
-import algorithms.euclideanDistance;
+import algorithms.*;
 import java.io.IOException;
 import manejoImagenes.*;
 import interfaz.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 /**
  *
@@ -31,19 +33,40 @@ public class AAProyecto1 {
         image[] images = new image[tamPob];
         for(int i = 1; i <= tamPob; i++){
             randomImage img = new randomImage(); 
-            images[i-1] = img.getImage(height, width, "1."+i);
+            images[i-1] = img.getImage(height, width, "1");
         }
         generation = images;
+        getPNG(generation[0]);
     }
     
+    public static void getPNG(image img)
+    {
+        BufferedImage newImg = new BufferedImage(goalImage.getHeight(), goalImage.getWidth(), BufferedImage.TYPE_INT_ARGB);
+        File f = null;
+        
+        for(int x = 0; x < goalImage.getHeight(); x++)
+        {
+            for(int y = 0; y < goalImage.getHeight(); y++)
+           {
+               int p = img.getPixel(x,y);
+               p = (255<<24) | (p<<16) | (p<<8) | p;
+               newImg.setRGB(x, y, p);
+            }
+        } 
+        try{
+          f = new File("images\\"+img.getName()+".png");
+          ImageIO.write(newImg, "png", f);
+        }catch(IOException e){
+          System.out.println(e);
+        }
+    }
     public static void startProgram(){
-        if(SELECTED_ALGORITHM.equals("Distancia Euclideana")){
+        if(SELECTED_ALGORITHM.equals("Euclidean Distance")){
             euclideanDistance start = new euclideanDistance();
             start.run();
-        }else if(SELECTED_ALGORITHM.equals("OTROALGORITMO")){
-            //OTROALGORITMO start = new OTROALGORITMO();
-            //start.run();
-            JOptionPane.showMessageDialog(null, "Not yet enabled.","Error", JOptionPane.ERROR_MESSAGE);
+        }else if(SELECTED_ALGORITHM.equals("Euclidean Average")){
+            euclideanAverage start = new euclideanAverage();
+             start.run();
         }else if(SELECTED_ALGORITHM.equals("Divide & Conquer")){
             divideAndConquer start = new divideAndConquer();
             start.run();
@@ -51,12 +74,16 @@ public class AAProyecto1 {
             JOptionPane.showMessageDialog(null, "Error","Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    public static void showResult()
+    {
+        int imagesToShow = (int)NUMERO_GENERACION/10;
+        System.out.println(imagesToShow);
+        
+    }
     
     public static void main(String[] args) throws IOException{
         menuInicial Ventana = new menuInicial();
         Ventana.setVisible(true);
-        
-         
     }
     
 }

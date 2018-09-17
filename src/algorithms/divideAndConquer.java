@@ -186,14 +186,14 @@ public class divideAndConquer {
             {
                 boolean cruzar = Math.random()*100<=menuInicial.PROBABILIDAD_CRUCE;
                 if (i == generation.length || cruzar == false){
-                    generation[i-1] = mutate(generation[i-1], goalImage, Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i));
+                    generation[i-1] = mutate(generation[i-1], goalImage, Integer.toString(NUMERO_GENERACION));
                     //System.out.println(Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i) +" Mutate");
                     i++;
                 }
                 else
                 {  
                     int j = i+1;  
-                    image[] newImg = crossover(generation[i-1], generation[i], Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(i), Integer.toString(NUMERO_GENERACION) + "." + Integer.toString(j));
+                    image[] newImg = crossover(generation[i-1], generation[i], Integer.toString(NUMERO_GENERACION), Integer.toString(NUMERO_GENERACION));
                     newImg[0].setDifference(getDifference(goalImage, newImg[0]));
                     newImg[1].setDifference(getDifference(goalImage, newImg[1]));
                     generation[i-1] = newImg[0];

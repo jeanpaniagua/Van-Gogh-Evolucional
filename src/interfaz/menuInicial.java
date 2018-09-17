@@ -82,7 +82,12 @@ public class menuInicial extends javax.swing.JFrame {
 
         jLabel6.setText("Algoritmo Genético:");
 
-        algoritmoSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Distancia Euclideana", "OTROALGORITMO", "Divide & Conquer" }));
+        algoritmoSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Euclidean Distance", "Euclidean Average", "Divide & Conquer" }));
+        algoritmoSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                algoritmoSelectActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,6 +165,10 @@ public class menuInicial extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_iniciarActionPerformed
+
+    private void algoritmoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_algoritmoSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_algoritmoSelectActionPerformed
 
     /**
      * @param args the command line arguments
