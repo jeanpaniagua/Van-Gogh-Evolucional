@@ -29,6 +29,7 @@ public class AAProyecto1 {
     public static String SELECTED_ALGORITHM = "";
     public static long beginTime;
     public static long endTime;
+    public static double TIMER;
     
     
     public static void firstGeneration(int height,int width, int tamPob) throws IOException{
@@ -68,20 +69,23 @@ public class AAProyecto1 {
             euclideanDistance start = new euclideanDistance();
             start.run();
             endTime = System.nanoTime();
-            double dif = (double) (endTime - beginTime) * 1.0e-9;
-            System.out.println("Tardó " + dif + " segundos.");
+            TIMER = (double) (endTime - beginTime) * 1.0e-9;
+            TIMER = (double)(Math.round(TIMER * 100d) / 100d);
+            System.out.println("Tardó " + TIMER + " segundos.");
         }else if(SELECTED_ALGORITHM.equals("Euclidean Average")){
             euclideanAverage start = new euclideanAverage();
              start.run();
              endTime = System.nanoTime();
-            double dif = (double) (endTime - beginTime) * 1.0e-9;
-            System.out.println("Tardó " + dif + " segundos.");
+            TIMER = (double) (endTime - beginTime) * 1.0e-9;
+            TIMER = (double)(Math.round(TIMER * 100d) / 100d);
+            System.out.println("Tardó " + TIMER + " segundos.");
         }else if(SELECTED_ALGORITHM.equals("Divide & Conquer")){
             divideAndConquer start = new divideAndConquer();
             start.run();
             endTime = System.nanoTime();
-            double dif = (double) (endTime - beginTime) * 1.0e-9;
-            System.out.println("Tardó " + dif + " segundos.");
+            TIMER = (double) (endTime - beginTime) * 1.0e-9;
+            TIMER = (double)(Math.round(TIMER * 100d) / 100d);
+            System.out.println("Tardó " + TIMER + " segundos.");
         }else{
             JOptionPane.showMessageDialog(null, "Error","Error", JOptionPane.ERROR_MESSAGE);
         }
