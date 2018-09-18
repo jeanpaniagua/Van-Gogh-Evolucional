@@ -20,7 +20,7 @@ import manejoImagenes.image;
  */
 public class euclideanDistance {
     
-    private static boolean OPTIMO = false;
+    public static boolean OPTIMO = false;
     
     public static int getDifference(image goalImage, image img)
     {
@@ -52,7 +52,7 @@ public class euclideanDistance {
                     p = img.getPixel(x, y);
                     similar++;
                     
-                    if(similar >= (int)(img.getHeight()* img.getWidth()*0.95)){
+                    if(similar >= (int)(img.getHeight()* img.getWidth()* menuInicial.PORCENTAJE_SIMILITUD)){
                         OPTIMO = true;
                     }
                 }

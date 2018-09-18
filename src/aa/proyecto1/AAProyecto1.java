@@ -12,12 +12,9 @@ import manejoImagenes.*;
 import interfaz.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 /**
  *
  * @author Jean Carlo
@@ -28,7 +25,6 @@ public class AAProyecto1 {
     
     public static image goalImage;
     public static image[] generation;
-    public static ArrayList<image> optimos = new ArrayList();
     public static int NUMERO_GENERACION = 0;
     public static String SELECTED_ALGORITHM = "";
     public static long beginTime;
@@ -67,21 +63,25 @@ public class AAProyecto1 {
         }
     }
     public static void startProgram(){
-        Date date = new Date();
-        beginTime = date.getTime();
-        //Caso 1: obtener la hora y salida por pantalla con formato:
-        DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
-        System.out.println("Hora inicio: "+hourFormat.format(date));
-        
+        beginTime = System.nanoTime();
         if(SELECTED_ALGORITHM.equals("Euclidean Distance")){
             euclideanDistance start = new euclideanDistance();
             start.run();
+            endTime = System.nanoTime();
+            double dif = (double) (endTime - beginTime) * 1.0e-9;
+            System.out.println("Tardó " + dif + " segundos.");
         }else if(SELECTED_ALGORITHM.equals("Euclidean Average")){
             euclideanAverage start = new euclideanAverage();
              start.run();
+             endTime = System.nanoTime();
+            double dif = (double) (endTime - beginTime) * 1.0e-9;
+            System.out.println("Tardó " + dif + " segundos.");
         }else if(SELECTED_ALGORITHM.equals("Divide & Conquer")){
             divideAndConquer start = new divideAndConquer();
             start.run();
+            endTime = System.nanoTime();
+            double dif = (double) (endTime - beginTime) * 1.0e-9;
+            System.out.println("Tardó " + dif + " segundos.");
         }else{
             JOptionPane.showMessageDialog(null, "Error","Error", JOptionPane.ERROR_MESSAGE);
         }

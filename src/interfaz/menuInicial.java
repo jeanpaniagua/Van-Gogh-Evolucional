@@ -22,6 +22,7 @@ public class menuInicial extends javax.swing.JFrame {
     public static int PROBABILIDAD_CRUCE;
     public static int PORCENTAJE_MUTAR;
     public static int PORCENTAJE_MENOS_APTOS;
+    public static float PORCENTAJE_SIMILITUD;
     
     public menuInicial() {
         initComponents();
@@ -58,6 +59,8 @@ public class menuInicial extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         algoritmoSelect = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        porcentajeSimilitud = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -71,6 +74,12 @@ public class menuInicial extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Población inicial:");
+
+        tamPob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tamPobActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Probabilidad de Cruce:");
 
@@ -90,6 +99,8 @@ public class menuInicial extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Porcentaje de Similitud:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,7 +109,6 @@ public class menuInicial extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel6)
-                    .addComponent(menosAptos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(genCruce, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
@@ -108,7 +118,10 @@ public class menuInicial extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel5)
                     .addComponent(algoritmoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(menosAptos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(porcentajeSimilitud, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,27 +131,31 @@ public class menuInicial extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tamPob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(probCruce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(genCruce, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menosAptos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addGap(12, 12, 12)
+                .addComponent(porcentajeSimilitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGap(10, 10, 10)
-                .addComponent(algoritmoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(algoritmoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,7 +163,7 @@ public class menuInicial extends javax.swing.JFrame {
 
     private void iniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarActionPerformed
         if(!isNumeric(tamPob.getText()) || !isNumeric(probCruce.getText()) || !isNumeric(genCruce.getText()) || 
-                !isNumeric(menosAptos.getText())){
+                !isNumeric(menosAptos.getText()) || !isNumeric(porcentajeSimilitud.getText())){
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Los valores deben ser únicamente números enteros.", "Error", JOptionPane.ERROR_MESSAGE);
         }else if((int)Integer.parseInt(menosAptos.getText()) > 20){
@@ -155,11 +172,14 @@ public class menuInicial extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La Probabilidad de Cruce no puede ser mayor a 90.", "Error", JOptionPane.ERROR_MESSAGE);
         }else if((int)Integer.parseInt(genCruce.getText()) > 100){
             JOptionPane.showMessageDialog(null, "El Porcentage de Cruce no puede ser mayor a 100.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else if((int)Integer.parseInt(porcentajeSimilitud.getText()) > 99 || (int)Integer.parseInt(porcentajeSimilitud.getText()) < 90){
+            JOptionPane.showMessageDialog(null, "El Porcentage de Similitud no puede ser mayor a 99 o menor a 90.", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             TAMAÑO_POBLACION = Integer.parseInt(tamPob.getText());
             PROBABILIDAD_CRUCE = Integer.parseInt(probCruce.getText());
             PORCENTAJE_MUTAR = Integer.parseInt(genCruce.getText());
             PORCENTAJE_MENOS_APTOS = Integer.parseInt(menosAptos.getText());
+            PORCENTAJE_SIMILITUD = Float.parseFloat("0." + porcentajeSimilitud.getText());
             SELECTED_ALGORITHM = algoritmoSelect.getSelectedItem().toString();
             interfaz Interfaz = new interfaz();
             Interfaz.setVisible(true);
@@ -170,6 +190,10 @@ public class menuInicial extends javax.swing.JFrame {
     private void algoritmoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_algoritmoSelectActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_algoritmoSelectActionPerformed
+
+    private void tamPobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tamPobActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tamPobActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,7 +241,9 @@ public class menuInicial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField menosAptos;
+    private javax.swing.JTextField porcentajeSimilitud;
     private javax.swing.JTextField probCruce;
     private javax.swing.JTextField tamPob;
     // End of variables declaration//GEN-END:variables

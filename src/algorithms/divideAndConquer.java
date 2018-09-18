@@ -24,7 +24,7 @@ import manejoImagenes.image;
  */
 public class divideAndConquer {
     
-    private static boolean OPTIMO = false;
+    public static boolean OPTIMO = false;
     
     public static void segment(image img){
         
@@ -60,7 +60,7 @@ public class divideAndConquer {
                     p = img.getPixel(x, y);
                     similar++;
                     
-                    if(similar >= (int)(img.getHeight()* img.getWidth()*0.99)){
+                    if(similar >= (int)(img.getHeight()* img.getWidth()* menuInicial.PORCENTAJE_SIMILITUD)){
                         OPTIMO = true;
                     }
                 }
