@@ -1,2 +1,4 @@
 # Van-Gogh-Evolucional
-Primer Proyecto Análisis de Algoritmos
+Proyecto del curso de Análisis de Algoritmos utilizando algoritmos genéticos.
+Jean Carlo Paniagua Bastos
+Kenneth Fernandez Fuentes
